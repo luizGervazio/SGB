@@ -1,0 +1,14 @@
+<app-sidebar></app-sidebar>
+<router-outlet></router-outlet>
+
+<app-fixed-header
+  [title]="'📚 Lista de Livros'"
+  [placeholder]="'🔍 Buscar por ID ou Nome do Livro...'"
+  [addButtonLabel]="'Adicionar Livro'"
+  (onSearch)="buscarLivro($event)"
+  (onAdd)="abrirModalLivro()"
+></app-fixed-header>
+
+<div class="main-content">
+  <app-main-table></app-main-table> <!-- ✅ aqui você chama o componente -->
+</div>
