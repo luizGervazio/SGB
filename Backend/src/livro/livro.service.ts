@@ -44,10 +44,24 @@ export class LivroService {
   }
 
 
-  async findAll() {
+  async findAll(titulo: string, autor: string) {
     const getLivros = await this.prisma.livro.findMany({
+      where: {
+        titulo: {
+          contains: titulo,
+          mode: 'insensitive',
+        },
+        autores: {
+          some: {
+            nome: {
+              contains: autor,
+              mode: 'insensitive',
+            },
+          },
+        },
+      },
       include: {
-        autores: true, // ← isso é o que faltava
+        autores: true, 
       },
     });
 

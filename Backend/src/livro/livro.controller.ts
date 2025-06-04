@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { LivroService } from './livro.service';
 import { CreateLivroDto } from './dto/create-livro.dto';
@@ -21,8 +22,13 @@ export class LivroController {
   }
 
   @Get()
-  findAll() {
-    return this.livroService.findAll();
+  findAll(
+    @Query('titulo') titulo?: string,
+    @Query('autor') autor?: string,
+    @Query('sort') sort: 'titulo' | 'autor' = 'titulo',
+    @Query('order') order: 'asc' | 'desc' = 'asc',
+  ) {
+    return this.livroService.findAll(titulo,autor);
   }
 
   @Get(':id')

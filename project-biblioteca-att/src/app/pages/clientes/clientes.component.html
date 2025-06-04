@@ -1,0 +1,10 @@
+<app-sidebar></app-sidebar>
+<router-outlet></router-outlet>
+
+<app-fixed-header
+  [title]="'Lista de Cliente'"
+  [placeholder]="'buscar Cliente por ID ou Nome do Cliente...'"
+  [addButtonLabel]="'Criar Empréstimo'"
+  (onSearch)="buscarLivro($event)"
+  (onAdd)="abrirModalLivro()"
+></app-fixed-header>   
