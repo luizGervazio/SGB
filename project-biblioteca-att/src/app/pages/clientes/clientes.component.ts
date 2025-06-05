@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FixedHeaderComponent } from '../../components/fixed-header/fixed-header.component';
-import { MainTableComponent } from "../../components/main-table/main-table.component";
+import { FixedHeaderComponentCliente } from '../../components/fixed-header-cliente/fixed-header-cliente.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-clientes',
-  imports: [RouterOutlet,SidebarComponent, FixedHeaderComponent, HttpClientModule, MainTableComponent],
+  imports: [RouterOutlet, SidebarComponent, FixedHeaderComponentCliente, HttpClientModule, ],
   templateUrl: './clientes.component.html',
 })
 export class ClientesComponent {
