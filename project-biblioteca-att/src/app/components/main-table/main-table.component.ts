@@ -54,6 +54,7 @@ export class MainTableComponent implements OnInit {
     const texto = this.filtro.toLowerCase();
     return this.livros.filter(l =>
       l.titulo.toLowerCase().includes(texto) ||
+      l.autores.toLowerCase().includes(texto) ||
       l.genero.toLowerCase().includes(texto) ||
       l.editora.toLowerCase().includes(texto) ||
       (l.autores?.map((a: any) => a.nome || a).join(', ') || '').toLowerCase().includes(texto)
@@ -72,14 +73,13 @@ export class MainTableComponent implements OnInit {
   }
 
   updateBook(updated: any) {
-    this.livroService.updateLivro(updated.id, updated).subscribe(response => {
-      const index = this.livros.findIndex(l => l.id === response.id);
-      if (index !== -1) {
-        this.livros[index] = response;
-      }
-      this.closeEditBookModal();
-    });
+  const index = this.livros.findIndex(l => l.id === updated.id);
+  if (index !== -1) {
+    this.livros[index] = updated;
   }
+  this.closeEditBookModal();
+}
+
 
   // Remoção
   openRemoveBookModal(livro: any) {
