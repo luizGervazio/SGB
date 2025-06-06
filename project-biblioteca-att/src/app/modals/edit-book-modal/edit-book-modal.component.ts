@@ -37,6 +37,8 @@ export class EditBookModalComponent implements OnChanges {
 
   saveChanges() {
   console.log('🧪 saveChanges() foi chamado!');
+  console.log('📦 Conteúdo original de editedBook:', this.editedBook);
+
   if (!this.editedBook?.id) {
     console.error('❌ ID do livro ausente!');
     return;
