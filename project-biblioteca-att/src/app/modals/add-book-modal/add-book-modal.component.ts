@@ -29,7 +29,7 @@ export class AddBookModalComponent {
   submit() {
     const book = {
       ...this.newBook,
-      autoresIds: [10] // ✅ ID fixo de autor
+      autoresIds: [1] // ✅ ID fixo de autor
     };
 
     this.cadastrarLivro(book);
