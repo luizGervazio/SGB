@@ -30,7 +30,7 @@ export class EmprestismoService {
 
   async findAll() {
     const getEmprestismo = await this.prisma.emprestismo.findMany({
-      include: { cliente: true },
+      include: { cliente: true,livro: true },
     });
     return getEmprestismo.map(getEmprestismo => this.mapToEntity(getEmprestismo));
   }
@@ -38,7 +38,7 @@ export class EmprestismoService {
   async findOne(id: number) {
     const getEmprestismo = await this.prisma.emprestismo.findMany({
       where: { id },
-      include: { cliente: true },
+      include: { cliente: true,livro: true },
     });
     return getEmprestismo.map(getEmprestismo => this.mapToEntity(getEmprestismo));
   }
