@@ -1,0 +1,38 @@
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal">
+    <button class="close-button" (click)="cancel()">×</button>
+    <h3>Editar Emprestimo</h3>
+
+    <form *ngIf="editedEmprestimo">
+    <label>ID do Livro:</label>
+    <input type="number" [(ngModel)]="editedEmprestimo.livroId" name="livroId" />
+
+    <label>ID do Cliente:</label>
+    <input type="number" [(ngModel)]="editedEmprestimo.clienteId" name="clienteId" />
+
+    <label>Data do Empréstimo:</label>
+    <input type="datetime-local" [(ngModel)]="editedEmprestimo.dataEmprestimo" name="dataEmprestimo" />
+
+    <label>Data de Devolução:</label>
+    <input type="datetime-local" [(ngModel)]="editedEmprestimo.dataDevolucao" name="dataDevolucao" />
+
+    <label>Atraso:</label>
+    <select [(ngModel)]="editedEmprestimo.atraso" name="atraso">
+      <option [ngValue]="true">Sim</option>
+      <option [ngValue]="false">Não</option>
+    </select>
+
+    <label>Status do Empréstimo:</label>
+    <select [(ngModel)]="editedEmprestimo.statusEmprestismo" name="statusEmprestismo">
+      <option [ngValue]="true">Ativo</option>
+      <option [ngValue]="false">Finalizado</option>
+    </select>
+  </form>
+
+    
+    <div class="buttons">
+      <button class="btn btn-cancel" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-confirm" (click)="saveChanges()">Salvar alterações</button>
+    </div>
+  </div>
+</div>

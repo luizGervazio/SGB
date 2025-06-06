@@ -1,0 +1,15 @@
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal">
+    <button class="close-button" (click)="cancel()">×</button>
+    <h3>Remover Emprestimo</h3>
+    <p>
+      Tem certeza que deseja remover o emprestimo<br>
+      <strong>{{ emprestimo?.nome }}</strong> (ID: <strong>{{ emprestimo?.id }}</strong>)?
+    </p>
+
+    <div class="buttons">
+      <button class="btn btn-cancel" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-confirm" (click)="confirmRemove()">Remover</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="main-content" [class.closed]="isSidebarClosed">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>LivroID</th>
+          <th>ClienteID</th>
+          <th>dataEmprestimo</th>
+          <th>dataDevolucao</th>
+          <th>atraso</th>
+          <th>statusEmprestimo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emprestimo of emprestimosFiltrados()">
+          <td>{{ emprestimo.id }}</td>
+          <td>{{ emprestimo.livros?.id }}</td>
+          <td>{{ emprestimo.cliente?.id }}</td>
+          <td>{{ emprestimo.dataEmprestimo | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ emprestimo.dataDevolucao | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ emprestimo.atraso }}</td>
+          <td>{{ emprestimo.statusEmprestismo ? 'Ativo' : 'Finalizado' }}</td>
+          <td>
+            <div class="action-buttons">
+              <button (click)="openEditEmprestimoModal(emprestimo)" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+              <button (click)="openRemoveEmprestimoModal(emprestimo)" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Remover
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-remove-Emprestimo-modal
+  [isOpen]="showRemoveEmprestimoModal"
+  [emprestimo]="emprestimoToRemove"
+  (close)="closeRemoveEmprestimoModal()"
+  (removed)="removeEmprestimo($event)"
+></app-remove-Emprestimo-modal>
+
+<!-- Modal de Edição -->
+<app-edit-emprestimo-modal
+  [isOpen]="showEditEmprestimoModal"
+  [emprestimo]="selectedEmprestimo"
+  (close)="closeEditEmprestimoModal()"
+  (updateEmprestimo)="updateEmprestimo($event)"
+></app-edit-emprestimo-modal>

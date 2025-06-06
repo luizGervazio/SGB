@@ -1,0 +1,52 @@
+<p>add-emprestimo-modal works!</p>
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal">
+    <button class="close-button" (click)="cancel()">×</button>
+    <h3>Adicionar Novo Emprestimo</h3>
+
+    <form #form="ngForm">
+  <!-- Selecionar Cliente -->
+  <label>Cliente:</label>
+  <select [(ngModel)]="newEmprestimo.clienteId" name="clienteId" required>
+    <option *ngFor="let cliente of clientes" [value]="cliente.id">
+      {{ cliente.nome }}
+    </option>
+  </select>
+
+  <!-- Selecionar Livro -->
+  <label>Livro:</label>
+  <select [(ngModel)]="newEmprestimo.livroId" name="livroId" required>
+    <option *ngFor="let livro of livros" [value]="livro.id">
+      {{ livro.titulo }}
+    </option>
+  </select>
+
+  <!-- Data de Empréstimo -->
+  <label>Data do Empréstimo:</label>
+  <input type="date" [(ngModel)]="newEmprestimo.dataEmprestimo" name="dataEmprestimo" required />
+
+  <!-- Data de Devolução -->
+  <label>Data de Devolução:</label>
+  <input type="date" [(ngModel)]="newEmprestimo.dataDevolucao" name="dataDevolucao" required />
+
+  <!-- Atraso -->
+  <label>Está em Atraso?</label>
+  <select [(ngModel)]="newEmprestimo.atraso" name="atraso">
+    <option [ngValue]="true">Sim</option>
+    <option [ngValue]="false">Não</option>
+  </select>
+
+  <!-- Status do Empréstimo -->
+  <label>Status do Empréstimo:</label>
+  <select [(ngModel)]="newEmprestimo.statusEmprestismo" name="statusEmprestismo">
+    <option [ngValue]="true">Ativo</option>
+    <option [ngValue]="false">Concluído</option>
+  </select>
+</form>
+
+    <div class="buttons">
+      <button class="btn btn-cancel" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-confirm" (click)="submit()">Adicionar Emprestimo</button>
+    </div>
+  </div>
+</div>

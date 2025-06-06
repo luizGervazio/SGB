@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SidebarService } from '../../services/sidebar.service';
 import { RemoveClienteModalComponent } from '../../modals/remove-cliente-modal/remove-cliente-modal.component';
-import { EditBookModalComponent } from '../../modals/edit-book-modal/edit-book-modal.component';
+import { EditClienteModalComponent } from '../../modals/edit-cliente-modal/edit-cliente-modal.component';
+
 import { ClienteService } from '../../services/cliente.service';
 
 @Component({
@@ -13,11 +14,12 @@ import { ClienteService } from '../../services/cliente.service';
     CommonModule,
     FormsModule,
     RemoveClienteModalComponent,
+    EditClienteModalComponent // ✅ Importa o componente de edição
   ],
   templateUrl: './main-table-cliente.component.html',
   styleUrls: ['./main-table-cliente.component.css']
 })
-export class MainTableClienteComponent implements OnInit {
+export class MainTableComponent implements OnInit {
   filtro: string = '';
   isSidebarClosed: boolean = false;
 
