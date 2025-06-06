@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FixedHeaderComponent } from './fixed-header.component';
+import { AddClientModalComponent } from './add-client-modal.component';
 
-describe('FixedHeaderComponent', () => {
-  let component: FixedHeaderComponent;
-  let fixture: ComponentFixture<FixedHeaderComponent>;
+describe('AddClientModalComponent', () => {
+  let component: AddClientModalComponent;
+  let fixture: ComponentFixture<AddClientModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FixedHeaderComponent]
+      imports: [AddClientModalComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FixedHeaderComponent);
+    fixture = TestBed.createComponent(AddClientModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

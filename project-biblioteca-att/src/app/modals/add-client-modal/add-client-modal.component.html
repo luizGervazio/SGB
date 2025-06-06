@@ -1,0 +1,37 @@
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal">
+    <button class="close-button" (click)="cancel()">×</button>
+    <h3>Adicionar Novo Cliente</h3>
+
+    <form>
+      <label>Nome:</label>
+      <input type="text" [(ngModel)]="newCliente.nome" name="Nome" />
+
+      <label>Email:</label>
+      <input type="text" [(ngModel)]="newCliente.email" name="Email" />
+
+      <label>Telefone:</label>
+      <input type="text" [(ngModel)]="newCliente.telefone" name="Telefone" />
+
+      <label>CPF:</label>
+      <input type="text" [(ngModel)]="newCliente.cpf" name="CPF" />
+
+      <label>Endereço:</label>
+      <input type="text" [(ngModel)]="newCliente.endereco" name="Endereco" />
+
+      <label>Numero:</label>
+      <input type="text" [(ngModel)]="newCliente.numero" name="Numero" />
+
+      <label>Cidade:</label>
+      <input type="text" [(ngModel)]="newCliente.cidade" name="Cidade" />
+
+      <label>Status:</label>
+      <input type="text" [(ngModel)]="newCliente.status" name="Status" />
+    </form>
+
+    <div class="buttons">
+      <button class="btn btn-cancel" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-confirm" (click)="submit()">Adicionar Cliente</button>
+    </div>
+  </div>
+</div>
