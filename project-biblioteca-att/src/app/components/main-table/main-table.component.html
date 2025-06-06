@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th>ID Autor</th>
           <th>Título</th>
           <th>Disponível</th>
           <th>Páginas</th>
@@ -16,6 +17,11 @@
       <tbody>
         <tr *ngFor="let livro of livrosFiltrados()">
           <td>{{ livro.id }}</td>
+          <td>
+            <span *ngFor="let autor of livro.autores; let last = last">
+              {{ autor.id }} - {{ autor.nome }}<span *ngIf="!last">, </span>
+            </span>
+          </td>
           <td>{{ livro.titulo }}</td>
           <td>
             <span [ngClass]="livro.disponivel ? 'disponivel' : 'emprestado'">
