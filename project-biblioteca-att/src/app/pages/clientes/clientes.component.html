@@ -5,6 +5,10 @@
   [title]="'Lista de Cliente'"
   [placeholder]="'buscar Cliente por ID ou Nome do Cliente...'"
   [addButtonLabel]="'Criar Cliente'"
-  (onSearch)="buscarLivro($event)"
-  (onAdd)="abrirModalLivro()"
-></app-fixed-header-cliente>   
+  (onSearch)="buscarCliente($event)"
+  (onAdd)="abrirModalCliente()"
+></app-fixed-header-cliente>
+
+<div class="main-content">
+  <app-main-table-cliente></app-main-table-cliente>
+</div>
