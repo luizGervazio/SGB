@@ -48,3 +48,11 @@
   (close)="closeRemoveClienteModal()"
   (remove)="removeCliente($event)"
 ></app-remove-cliente-modal>
+
+<!-- Modal de Edição -->
+<app-edit-cliente-modal
+  [isOpen]="showEditClienteModal"
+  [cliente]="selectedCliente"
+  (close)="closeEditClienteModal()"
+  (updateCliente)="updateCliente($event)"
+></app-edit-cliente-modal>
