@@ -1,10 +1,14 @@
 <app-sidebar></app-sidebar>
 <router-outlet></router-outlet>
 
-<app-fixed-header
+<app-fixed-header-emprestimo
   [title]="'Lista de Empréstimos'"
   [placeholder]="'buscar Empréstimos por ID ou Nome do Cliente...'"
   [addButtonLabel]="'Criar Empréstimo'"
-  (onSearch)="buscarLivro($event)"
-  (onAdd)="abrirModalLivro()"
-></app-fixed-header> 
+  (onSearch)="buscarEmprestimo($event)"
+  (onAdd)="abrirModalEmprestimo()"
+></app-fixed-header-emprestimo>
+
+<div class="main-content">
+  <app-main-table-emprestimo></app-main-table-emprestimo>
+</div>
