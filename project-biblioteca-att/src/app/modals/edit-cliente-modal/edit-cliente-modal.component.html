@@ -1,0 +1,38 @@
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal">
+    <button class="close-button" (click)="cancel()">×</button>
+    <h3>Editar Cliente</h3>
+
+    <form>
+      <label>Nome:</label>
+      <input type="text" [(ngModel)]="editedCliente.nome" name="Nome" />
+
+
+      <label>Email:</label>
+      <input type="text" [(ngModel)]="editedCliente.email" name="Email" />
+
+      <label>Telefone:</label>
+      <input type="text" [(ngModel)]="editedCliente.telefone" name="Telefone" />
+
+      <label>CPF:</label>
+      <input type="text" [(ngModel)]="editedCliente.cpf" name="CPF" />
+
+      <label>Endereço:</label>
+      <input type="text" [(ngModel)]="editedCliente.endereco" name="Endereço" />
+
+      <label>Numero:</label>
+      <input type="text" [(ngModel)]="editedCliente.numero" name="Numero" />
+
+      <label>Cidade:</label>
+      <input type="text" [(ngModel)]="editedCliente.cidade" name="Cidade" />
+
+      <label>Status:</label>
+      <input type="text" [(ngModel)]="editedCliente.status" name="Status" />  
+
+    <div class="buttons">
+      <button class="btn btn-cancel" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-confirm" (click)="saveChanges()">Salvar alterações</button>
+    </div>
+    </form>
+  </div>
+</div>
