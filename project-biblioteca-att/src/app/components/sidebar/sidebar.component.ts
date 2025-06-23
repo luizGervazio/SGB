@@ -29,7 +29,8 @@ export class SidebarComponent implements OnInit {
   menuItems = [
     { label: 'Livros', icon: '📚', route: '/livros' },
     { label: 'Empréstimos', icon: '📦', route: '/emprestimos' },
-    { label: 'Cadastro de Cliente', icon: '👤', route: '/clientes' }
+    { label: 'Cadastro de Cliente', icon: '👤', route: '/clientes' },
+    { label: 'Cadastro de Autor', icon: '🧑‍⚖️', route: '/autores' }
   ];
 }
  

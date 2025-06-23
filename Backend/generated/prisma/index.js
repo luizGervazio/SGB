@@ -33,11 +33,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 6.6.0
- * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+ * Query Engine version: 173f8d54f8d52e692c7e27e72a88314ec7aeff60
  */
 Prisma.prismaVersion = {
   client: "6.6.0",
-  engine: "f676762280b54cd07c770017ed3711ddde35f37a"
+  engine: "173f8d54f8d52e692c7e27e72a88314ec7aeff60"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -169,7 +169,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Luiz Felipe\\Documents\\nest\\Crud\\project-biblioteca\\generated\\prisma",
+      "value": "C:\\Users\\Luiz Felipe\\Documents\\Meu\\Faculdade\\dartora\\trabalho\\projeto-biblioteca\\Backend\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -183,16 +183,16 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Luiz Felipe\\Documents\\nest\\Crud\\project-biblioteca\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Luiz Felipe\\Documents\\Meu\\Faculdade\\dartora\\trabalho\\projeto-biblioteca\\Backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
-  "engineVersion": "f676762280b54cd07c770017ed3711ddde35f37a",
+  "engineVersion": "173f8d54f8d52e692c7e27e72a88314ec7aeff60",
   "datasourceNames": [
     "db"
   ],
@@ -201,7 +201,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:ejdvg1996@localhost:5432/projectBiblioteca?schema=public"
+        "value": null
       }
     }
   },

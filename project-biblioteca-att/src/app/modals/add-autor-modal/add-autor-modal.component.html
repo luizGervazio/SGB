@@ -1,0 +1,14 @@
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal">
+    <button class="close-button" (click)="cancel()">×</button>
+    <h3>Adicionar Novo Autor</h3>
+    <form>
+      <label>Nome:</label>
+      <input type="text" [(ngModel)]="newAutor.nome" name="nome" />
+    </form>
+    <div class="buttons">
+      <button class="btn btn-cancel" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-confirm" (click)="submit()">Adicionar Livro</button>
+    </div>
+  </div>
+</div>
