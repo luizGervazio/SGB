@@ -4,11 +4,13 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LivroService } from '../../services/livro.service';
+import { AutorService } from '../../services/autor.service';
 
 @Component({
   selector: 'app-edit-book-modal',
@@ -17,7 +19,7 @@ import { LivroService } from '../../services/livro.service';
   templateUrl: './edit-book-modal.component.html',
   styleUrls: ['./edit-book-modal.component.css']
 })
-export class EditBookModalComponent implements OnChanges {
+export class EditBookModalComponent implements OnInit, OnChanges {
   @Input() isOpen: boolean = false;
   @Input() book: any;
 
@@ -26,49 +28,63 @@ export class EditBookModalComponent implements OnChanges {
 
   editedBook: any = {};
 
-  constructor(private livroService: LivroService) {}
+  autoresDisponiveis: any[] = [];
+
+  constructor(
+    private livroService: LivroService,
+    private autorService: AutorService
+  ) {}
+
+  ngOnInit(): void {
+    this.autorService.getAutor().subscribe({
+      next: (autores) => {
+        this.autoresDisponiveis = autores;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar autores:', err);
+      }
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['book'] && this.book) {
-      // Clonagem segura do objeto original
-      this.editedBook = { ...this.book };
+      // Clonagem do livro
+      this.editedBook = {
+        ...this.book,
+        autores: this.book.autores.map((a: any) => a.id) // transforma [{id: 1, nome: ...}] → [1, ...]
+      };
     }
   }
 
   saveChanges() {
-  console.log('🧪 saveChanges() foi chamado!');
-  console.log('📦 Conteúdo original de editedBook:', this.editedBook);
+    console.log('🧪 saveChanges() foi chamado!');
+    console.log('📦 Conteúdo original de editedBook:', this.editedBook);
 
-  if (!this.editedBook?.id) {
-    console.error('❌ ID do livro ausente!');
-    return;
-  }
-
-  const autoresIds = Array.isArray(this.editedBook.autores)
-    ? this.editedBook.autores.map((a: any) => a.id)
-    : [];
-
-  const dataToSend = {
-    ...this.editedBook,
-    autoresIds,
-  };
-
-  delete dataToSend.autores;
-
-  console.log('📤 Enviando dados para o backend:', dataToSend);
-
-  this.livroService.updateLivro(this.editedBook.id, dataToSend).subscribe({
-    next: (updated) => {
-      console.log('✅ Livro atualizado com sucesso:', updated);
-      this.updateBook.emit(updated);
-      this.close.emit();
-    },
-    error: (err) => {
-      console.error('❌ Erro ao atualizar livro:', err);
+    if (!this.editedBook?.id) {
+      console.error('❌ ID do livro ausente!');
+      return;
     }
-  });
-}
 
+    const dataToSend = {
+      ...this.editedBook,
+      autoresIds: this.editedBook.autores
+    };
+
+    delete dataToSend.autores;
+
+    console.log('📤 Enviando dados para o backend:', dataToSend);
+
+    this.livroService.updateLivro(this.editedBook.id, dataToSend).subscribe({
+      next: (updated) => {
+        console.log('✅ Livro atualizado com sucesso:', updated);
+        this.updateBook.emit(updated);
+        this.close.emit();
+      },
+      error: (err) => {
+        console.error('❌ Erro ao atualizar livro:', err);
+      }
+    });
+  }
 
   cancel() {
     this.close.emit();

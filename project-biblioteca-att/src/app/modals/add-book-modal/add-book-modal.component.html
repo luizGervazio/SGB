@@ -19,6 +19,13 @@
       <label>Editora:</label>
       <input type="text" [(ngModel)]="newBook.editora" name="editora" />
 
+      <label>Autores:</label>
+      <select [(ngModel)]="newBook.autores" name="autores" multiple>
+        <option *ngFor="let autor of autoresDisponiveis" [ngValue]="autor.id">
+          {{ autor.nome }}
+        </option>
+      </select>
+
       <label>Status:</label>
       <select [(ngModel)]="newBook.disponivel" name="disponivel">
         <option [ngValue]="true">Disponível</option>
