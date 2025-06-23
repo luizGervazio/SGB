@@ -1,1 +1,44 @@
-<p>main-table-autores works!</p>
+<div class="main-content" [class.closed]="isSidebarClosed">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let autor of autoresFiltrados()">
+          <td>{{ autor.id }}</td>
+          <td>{{ autor.nome }}</td>
+          <td>
+            <div class="action-buttons">
+              <button (click)="openEditAutorModal(autor)" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+              <button (click)="openRemoveAutorModal(autor)" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Remover
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-remove-autor-modal
+  [isOpen]="showRemoveAutorModal"
+  [autor]="autorToRemove"
+  (close)="closeRemoveAutorModal()"
+  (remove)="removeAutor($event)"
+></app-remove-autor-modal>
+
+<!-- Modal de Edição -->
+<app-edit-autor-modal
+  [isOpen]="showEditAutorModal"
+  [autor]="selectedAutor"
+  (close)="closeEditAutorModal()"
+  (updateAutor)="updateAutor($event)"
+></app-edit-autor-modal>
