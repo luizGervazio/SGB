@@ -22,9 +22,30 @@ export class EmprestismoService {
   }
 
   async create(createEmprestismoDto: CreateEmprestismoDto) {
+    // 1. Verifica se o livro existe e está disponível
+    const livro = await this.prisma.livro.findUnique({
+      where: { id: createEmprestismoDto.livroId },
+    });
+
+    if (!livro) {
+      throw new Error('Livro não encontrado');
+    }
+
+    if (!livro.disponivel) {
+      throw new Error('Livro já está emprestado ou indisponível');
+    }
+
+    // 2. Cria o empréstimo
     const createEmprestismo = await this.prisma.emprestismo.create({
       data: createEmprestismoDto,
     });
+
+    // 3. Atualiza o livro para "indisponível"
+    await this.prisma.livro.update({
+      where: { id: createEmprestismoDto.livroId },
+      data: { disponivel: false },
+    });
+
     return this.mapToEntity(createEmprestismo);
   }
 
@@ -37,7 +58,7 @@ export class EmprestismoService {
 
   async findOne(id: number) {
     const getEmprestismo = await this.prisma.emprestismo.findMany({
-      where: { id },
+      where: { id: Number(id) },
       include: { cliente: true,livro: true },
     });
     return getEmprestismo.map(getEmprestismo => this.mapToEntity(getEmprestismo));
@@ -52,9 +73,27 @@ export class EmprestismoService {
   }
 
   async remove(id: number) {
-    const deleteEmprestismo = await this.prisma.emprestismo.delete({
-      where: { id }
+    // 1. Busca o empréstimo para saber qual livro foi emprestado
+    const emprestimo = await this.prisma.emprestismo.findUnique({
+      where: { id },
     });
-    return `This action removes a #${id} emprestismo`;
+
+    if (!emprestimo) {
+      throw new Error(`Empréstimo com ID ${id} não encontrado`);
+    }
+
+    // 2. Remove o empréstimo
+    await this.prisma.emprestismo.delete({
+      where: { id: Number(id) },
+    });
+
+    // 3. Atualiza o livro para disponível
+    await this.prisma.livro.update({
+      where: { id: emprestimo.livroId },
+      data: { disponivel: true },
+    });
+
+    return `Empréstimo #${id} removido e livro marcado como disponível`;
   }
+
 }
