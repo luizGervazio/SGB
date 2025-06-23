@@ -1,13 +1,13 @@
 <app-sidebar></app-sidebar>
 <router-outlet></router-outlet>
 
-<app-fixed-header-cliente
-  [title]="'Lista de Cliente'"
-  [placeholder]="'buscar Cliente por ID ou Nome do Cliente...'"
-  [addButtonLabel]="'Criar Cliente'"
-  (onSearch)="buscarCliente($event)"
-  (onAdd)="abrirModalCliente()"
-></app-fixed-header-cliente>
+<app-fixed-header-autores
+  [title]="'Lista de Autores'"
+  [placeholder]="'buscar Autor por ID ou Nome do Autor...'"
+  [addButtonLabel]="'Criar Autor'"
+  (onSearch)="buscarAutor($event)"
+  (onAdd)="abrirModalAutor()"
+></app-fixed-header-autores>
 
 <div class="main-content">
   <app-main-table-cliente></app-main-table-cliente>

@@ -1,1 +1,23 @@
-<p>fixed-header-autores works!</p>
+<div class="fixed-header" [class.closed]="isSidebarClosed">
+  <div class="header-content">
+    <h2>{{ title }}</h2>
+
+    <input
+      type="text"
+      class="search-input"
+      [placeholder]="placeholder || 'Buscar...'"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch.emit(searchTerm)"
+    />
+
+    <button (click)="openModal()" class="btn btn-success" style="margin-left: auto;">
+      <i class="fas fa-plus"></i> {{ addButtonLabel || 'Adicionar' }}
+    </button>
+  </div>
+</div>
+
+<app-add-autor-modal
+  [isOpen]="showAddBookModal"
+  (close)="closeModal()"
+  (addBook)="handleAddBook($event)"
+></app-add-autor-modal>
