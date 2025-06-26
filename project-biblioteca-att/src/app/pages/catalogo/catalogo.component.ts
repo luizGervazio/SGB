@@ -9,5 +9,6 @@ import { MainCatalogoComponent } from "../../components/main-catalogo/main-catal
   templateUrl: './catalogo.component.html',
 })
 export class CatalogoComponent {
+Livros = 5;
 
 }

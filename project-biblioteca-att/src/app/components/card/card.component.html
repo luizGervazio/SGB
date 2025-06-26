@@ -1,0 +1,38 @@
+<!-- livro-card.component.html -->
+<div
+  class="card-livro"
+>
+  <!-- Efeito Shimmer -->
+  <div class="shimmer"></div>
+
+  <!-- Capa do Livro -->
+  <div class="topo-card">
+    <div class="padrao-capa">
+      <div class="icone-livro">📚</div>
+      <div class="texto-capa">Capa do Livro</div>
+    </div>
+
+    <!-- Sobreposição ao passar o mouse -->
+    <div class="hover-overlay">
+      <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
+      </svg>
+    </div>
+
+    <!-- Nota -->
+    <div class="nota-livro">
+      <svg class="estrela" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.905 1.52 8.264L12 18.896l-7.456 4.581 1.52-8.264L0 9.308l8.332-1.151z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Informações do Livro -->
+  <div class="info-livro">
+    <h2>{{ livro.titulo }}</h2>
+    <p class="autor">👤 {{ nomesAutores }}</p>
+    <p class="ano">📅 {{ livro.ano }}</p>
+    <span class="categoria">{{ livro.genero }}</span>
+  </div>
+</div>

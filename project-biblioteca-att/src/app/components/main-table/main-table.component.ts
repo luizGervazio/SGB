@@ -36,12 +36,16 @@ export class MainTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sidebarService.sidebarState$.subscribe(state => {
-      this.isSidebarClosed = state;
-    });
+  this.sidebarService.sidebarState$.subscribe(state => {
+    this.isSidebarClosed = state;
+  });
 
-    this.carregarLivros(); // ✅ Chama o método extraído
-  }
+  this.carregarLivros(); 
+
+  this.livroService.getAtualizacoes().subscribe(() => {
+    this.carregarLivros();
+  });
+}
 
   // ✅ Padrão aplicado: método separado para buscar livros
   carregarLivros(): void {

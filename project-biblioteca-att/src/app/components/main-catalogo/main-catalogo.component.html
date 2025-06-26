@@ -1,1 +1,41 @@
-<p>main-catalogo works!</p>
+<div class="filtro-container">
+  <div class="filtro-box">
+    <div class="filtro-grid">
+      <!-- Campo de Busca -->
+      <div class="filtro-busca">
+        <div class="busca-group">
+          <span class="icone-search">🔍</span>
+          <input
+            type="text"
+            class="input-busca"
+            [placeholder]="'Buscar por título ou autor...'"
+          />
+        </div>
+      </div>
+
+      <!-- Select Categoria -->
+      <select class="select-filtro" >
+        <option value="all">Todas as categorias</option>
+        <option *ngFor="let category of categorias" [value]="category">{{ category }}</option>
+      </select>
+
+      <!-- Select Ordenação -->
+      <select class="select-filtro">
+        <option value="title">Título</option>
+        <option value="author">Autor</option>
+        <option value="year">Ano</option>
+        <option value="rating">Avaliação</option>
+        <option value="price">Preço</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<main class="main-catalogo">
+  <div class="grid-livros">
+    <app-card
+  *ngFor="let livro of livrosFiltrados()"
+  [livro]="livro"
+></app-card>
+  </div>
+</main>
