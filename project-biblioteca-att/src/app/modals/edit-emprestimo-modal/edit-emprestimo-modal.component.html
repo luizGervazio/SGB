@@ -4,11 +4,21 @@
     <h3>Editar Emprestimo</h3>
 
     <form *ngIf="editedEmprestimo">
-    <label>ID do Livro:</label>
-    <input type="number" [(ngModel)]="editedEmprestimo.livroId" name="livroId" />
+    <!-- Selecionar Cliente -->
+  <!-- Cliente -->
+      <select [(ngModel)]="editedEmprestimo.clienteId" name="clienteId" required>
+  <option *ngFor="let cliente of clientes" [value]="cliente.id">
+    {{ cliente.nome }}
+  </option>
+</select>
 
-    <label>ID do Cliente:</label>
-    <input type="number" [(ngModel)]="editedEmprestimo.clienteId" name="clienteId" />
+<select [(ngModel)]="editedEmprestimo.livroId" name="livroId" required>
+  <option *ngFor="let livro of livros" [value]="livro.id">
+    {{ livro.titulo }}
+  </option>
+</select>
+
+
 
     <label>Data do Empréstimo:</label>
     <input type="datetime-local" [(ngModel)]="editedEmprestimo.dataEmprestimo" name="dataEmprestimo" />

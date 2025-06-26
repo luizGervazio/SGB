@@ -36,12 +36,18 @@ export class MainTableAutorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sidebarService.sidebarState$.subscribe(state => {
-      this.isSidebarClosed = state;
-    });
+  this.carregarAutores();
 
-    this.carregarAutor(); // ✅ Chama o método extraído
-  }
+  this.autorService.getAtualizacoes().subscribe(() => {
+    this.carregarAutores();
+  });
+}
+
+carregarAutores(): void {
+  this.autorService.getAutor().subscribe(res => {
+    this.autores = res;
+  });
+}
 
   // ✅ Padrão aplicado: método separado para buscar clientes
   carregarAutor(): void {

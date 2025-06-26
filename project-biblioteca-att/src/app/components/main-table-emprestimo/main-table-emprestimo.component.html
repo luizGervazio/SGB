@@ -16,8 +16,12 @@
       <tbody>
         <tr *ngFor="let emprestimo of emprestimosFiltrados()">
           <td>{{ emprestimo.id }}</td>
-          <td>{{ emprestimo.livros?.id }}</td>
-          <td>{{ emprestimo.cliente?.id }}</td>
+                    <td>
+            {{ emprestimo.livros?.id }} - {{ emprestimo.livros?.titulo }}
+          </td>
+          <td>
+            {{ emprestimo.cliente?.id }} - {{ emprestimo.cliente?.nome }}
+          </td>
           <td>{{ emprestimo.dataEmprestimo | date:'dd/MM/yyyy HH:mm' }}</td>
           <td>{{ emprestimo.dataDevolucao | date:'dd/MM/yyyy HH:mm' }}</td>
           <td>{{ emprestimo.atraso }}</td>
@@ -46,9 +50,12 @@
 ></app-remove-Emprestimo-modal>
 
 <!-- Modal de Edição -->
+<!-- Modal de Edição -->
 <app-edit-emprestimo-modal
   [isOpen]="showEditEmprestimoModal"
   [emprestimo]="selectedEmprestimo"
+  [clientes]="clientes"
+  [livros]="livros"
   (close)="closeEditEmprestimoModal()"
   (updateEmprestimo)="updateEmprestimo($event)"
 ></app-edit-emprestimo-modal>

@@ -21,6 +21,8 @@ import { FormsModule } from '@angular/forms';
 export class MainTableEmprestimoComponent implements OnInit {
   filtro: string = '';
   isSidebarClosed: boolean = false;
+  clientes: any[] = [];
+  livros: any[] = [];
 
   emprestimos: any[] = [];
 
@@ -40,7 +42,13 @@ export class MainTableEmprestimoComponent implements OnInit {
       this.isSidebarClosed = state;
     });
 
-    this.carregarEmprestimos(); // ✅ Chama o método extraído
+    this.carregarEmprestimos();
+    this.carregarClientes();
+    this.carregarLivros();
+
+    this.emprestimoService.getAtualizacoes().subscribe(() => {
+      this.carregarEmprestimos();
+    });
   }
 
   carregarEmprestimos(): void {
@@ -98,8 +106,21 @@ emprestimosFiltrados() {
 
   removeEmprestimo(emprestimo: any) {
     this.emprestimoService.deleteEmprestimo(emprestimo.id).subscribe(() => {
-      this.emprestimos = this.emprestimos.filter(c => c.id !== emprestimo.id);
       this.closeRemoveEmprestimoModal();
+      // A atualização vai acontecer automaticamente via .next()
     });
   }
+
+  carregarClientes() {
+    this.emprestimoService.getClientes().subscribe((res) => {
+      this.clientes = res;
+    });
+  }
+
+  carregarLivros() {
+    this.emprestimoService.getLivros().subscribe((res) => {
+      this.livros = res;
+    });
+  }
+
 }

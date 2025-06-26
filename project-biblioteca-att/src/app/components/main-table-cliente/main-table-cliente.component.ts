@@ -41,7 +41,10 @@ export class MainTableComponent implements OnInit {
       this.isSidebarClosed = state;
     });
 
-    this.carregarClientes(); // ✅ Chama o método extraído
+    this.carregarClientes();
+    this.clienteService.getAtualizacoes().subscribe(() => {
+      this.carregarClientes();
+    }); 
   }
 
   // ✅ Padrão aplicado: método separado para buscar clientes

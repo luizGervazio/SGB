@@ -20,7 +20,8 @@ import { EmprestimoService } from '../../services/emprestimo.service';
 export class EditEmprestimoModalComponent implements OnChanges {
   @Input() isOpen: boolean = false;
   @Input() emprestimo: any;
-
+  @Input() clientes: any[] = [];
+  @Input() livros: any[] = [];
   @Output() close = new EventEmitter<void>();
   @Output() updateEmprestimo = new EventEmitter<any>();
 
@@ -49,8 +50,8 @@ export class EditEmprestimoModalComponent implements OnChanges {
     }
 
     const dataToSend = {
-      livroId: this.editedEmprestimo.livroId,
-      clienteId: this.editedEmprestimo.clienteId,
+      livroId: Number(this.editedEmprestimo.livroId),
+      clienteId: Number(this.editedEmprestimo.clienteId),
       dataEmprestimo: this.formatDateTime(this.editedEmprestimo.dataEmprestimo),
       dataDevolucao: this.formatDateTime(this.editedEmprestimo.dataDevolucao),
       atraso: this.editedEmprestimo.atraso,
@@ -66,6 +67,7 @@ export class EditEmprestimoModalComponent implements OnChanges {
         this.close.emit();
       },
       error: (err) => {
+        console.log('📤 Enviando dados para o backend:', dataToSend);
         console.error('❌ Erro ao atualizar empréstimo:', err);
       }
     });
