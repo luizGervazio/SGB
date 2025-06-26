@@ -30,7 +30,8 @@ export class SidebarComponent implements OnInit {
     { label: 'Livros', icon: '📚', route: '/livros' },
     { label: 'Empréstimos', icon: '📦', route: '/emprestimos' },
     { label: 'Cadastro de Cliente', icon: '👤', route: '/clientes' },
-    { label: 'Cadastro de Autor', icon: '🧑‍⚖️', route: '/autores' }
+    { label: 'Cadastro de Autor', icon: '🧑‍⚖️', route: '/autores' },
+    { label: 'Catalogo', icon: '🏫', route: '/catalogo' }
   ];
 }
  
