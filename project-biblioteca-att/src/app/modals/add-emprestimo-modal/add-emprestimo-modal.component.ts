@@ -9,7 +9,6 @@ import { EmprestimoService } from '../../services/emprestimo.service';
   imports: [CommonModule, FormsModule],
   templateUrl: './add-emprestimo-modal.component.html',
   styleUrls: ['./add-emprestimo-modal.component.css'],
-  providers: [EmprestimoService]
 })
 export class AddEmprestimoModalComponent {
   @Input() isOpen: boolean = false;

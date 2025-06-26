@@ -41,6 +41,7 @@ export class FixedHeaderComponentEmprestimo implements OnInit {
 
     this.carregarClientes();
     this.carregarLivros();
+    
   }
 
   carregarClientes() {

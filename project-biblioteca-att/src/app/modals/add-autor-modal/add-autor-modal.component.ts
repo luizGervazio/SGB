@@ -32,6 +32,7 @@ export class AddAutorModalComponent {
   cadastrarAutor(autor: any): void {
     this.autorService.addAutor(autor).subscribe((createdAutor) => {
       this.addAutor.emit(createdAutor);
+      this.close.emit();
       this.reset();
     });
   }
