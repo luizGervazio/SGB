@@ -3,7 +3,7 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { PrismaService } from 'src/database/prisma.service';
 import { Usuario } from './entities/usuario.entity';
-
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsuarioService {
@@ -21,10 +21,16 @@ export class UsuarioService {
 
 
   async create(createUsuarioDto: CreateUsuarioDto) {
+    const senhaHash = await bcrypt.hash(createUsuarioDto.senha, 10); // hasheia
+
     const createUsuario = await this.prisma.usuario.create({
-      data: createUsuarioDto
+      data: {
+        ...createUsuarioDto,
+        senha: senhaHash, // salva a senha hasheada
+      },
     });
-    return this.mapToEntity(createUsuario) ;
+
+    return this.mapToEntity(createUsuario);
   }
 
   async findAll() {
@@ -38,6 +44,15 @@ export class UsuarioService {
     });
     return getUsuario.map(getUsuario => this.mapToEntity(getUsuario));
   }
+
+  async findByEmail(email: string): Promise<Usuario | null> {
+    const usuario = await this.prisma.usuario.findUnique({
+      where: { email },
+    });
+
+    return usuario ? this.mapToEntity(usuario) : null;
+  }
+
 
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
     const updateUsuario = await this.prisma.usuario.update({
