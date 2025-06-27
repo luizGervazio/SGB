@@ -1,0 +1,45 @@
+<!-- livro-detalhes.component.html -->
+<div class="overlay">
+  <div class="modal">
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="header-grid">
+        <button class="close-btn" (click)="onClose()">&times;</button>
+        <div class="capa-livro">
+          <div class="capa-bg">
+            <div class="capa-icone">📚</div>
+            <div class="capa-texto">Capa do Livro</div>
+          </div>
+        </div>
+        <div class="livro-info">
+          <h2 class="titulo">{{ livro.titulo }}</h2>
+          <div class="info-line">
+            <span class="icon">👤</span>
+            <span>{{ nomesAutores  }}</span>
+          </div>
+          <div class="info-line">
+            <span class="icon">📅</span>
+            <span>{{ livro.ano }}</span>
+          </div>
+          <div class="info-line">
+            <span class="icon">🏷️</span>
+            <span>{{ livro.genero }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Descrição e Detalhes -->
+    <div class="modal-body">
+      <div class="detalhes">
+        <h4>Detalhes</h4>
+        <div class="detalhe-item">
+          <span>Páginas:</span>
+          <strong>{{ livro.paginas }}</strong>
+        </div>
+      <div class="acoes">
+        <button class="btn-comprar">🛒 Pedir para Emprestar</button>
+      </div>
+    </div>
+  </div>
+</div>

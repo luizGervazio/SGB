@@ -9,11 +9,12 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmprestimoService } from '../../services/emprestimo.service';
+import { MessageModalComponent } from "../../messages/message-modal/message-modal.component";
 
 @Component({
   selector: 'app-edit-emprestimo-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MessageModalComponent],
   templateUrl: './edit-emprestimo-modal.component.html',
   styleUrls: ['./edit-emprestimo-modal.component.css']
 })
@@ -24,6 +25,11 @@ export class EditEmprestimoModalComponent implements OnChanges {
   @Input() livros: any[] = [];
   @Output() close = new EventEmitter<void>();
   @Output() updateEmprestimo = new EventEmitter<any>();
+
+  showMessageModal: boolean = false;
+  messageType: 'success' | 'error' = 'success';
+  messageTitle: string = '';
+  messageDescription: string = '';
 
   editedEmprestimo: any = {};
 
@@ -64,11 +70,23 @@ export class EditEmprestimoModalComponent implements OnChanges {
       next: (updated) => {
         console.log('✅ Empréstimo atualizado com sucesso:', updated);
         this.updateEmprestimo.emit(updated);
-        this.close.emit();
+
+        this.messageType = 'success';
+        this.messageTitle = 'Empréstimo atualizado com sucesso!';
+        this.messageDescription = 'As informações do empréstimo foram atualizadas.';
+        this.showMessageModal = true;
+
+        this.close.emit(); // Se quiser aguardar o usuário fechar o modal, mova isso para dentro do handler do modal
       },
       error: (err) => {
         console.log('📤 Enviando dados para o backend:', dataToSend);
         console.error('❌ Erro ao atualizar empréstimo:', err);
+
+        this.messageType = 'error';
+        this.messageTitle = 'Erro ao atualizar empréstimo';
+        this.messageDescription = 'Não foi possível atualizar o empréstimo. Verifique os dados.';
+        this.showMessageModal = true;
+        this.close.emit();
       }
     });
   }

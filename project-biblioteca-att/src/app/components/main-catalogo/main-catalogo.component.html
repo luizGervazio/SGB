@@ -33,9 +33,18 @@
 
 <main class="main-catalogo">
   <div class="grid-livros">
-    <app-card
+  <app-card
   *ngFor="let livro of livrosFiltrados()"
   [livro]="livro"
+   (click)="abrirDetalhes(livro)">
 ></app-card>
+
+
+<app-card-detalhes
+  *ngIf="livroSelecionado"
+  [livro]="livroSelecionado"
+  (fechar)="livroSelecionado = null">
+</app-card-detalhes>
+
   </div>
 </main>
