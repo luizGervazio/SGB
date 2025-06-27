@@ -8,7 +8,6 @@
           type="email"
           formControlName="email"
           placeholder="Digite seu e-mail cadastrado"
-          required
         />
       </div>
 
@@ -21,3 +20,11 @@
     </p>
   </div>
 </div>
+
+<app-message-modal
+  [isOpen]="showMessageModal"
+  [type]="messageType"
+  [title]="messageTitle"
+  [description]="messageDescription"
+  (close)="showMessageModal = false"
+></app-message-modal>
