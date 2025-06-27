@@ -1,6 +1,6 @@
 <div class="body">
   <div class="login-container">
-    <form>
+    <form [formGroup]="recuperarForm" (ngSubmit)="enviarLink()">
       <div class="form-group">
         <label for="email">E-mail</label>
         <input
@@ -16,7 +16,7 @@
     </form>
 
     <p class="support-text">
-      Caso não consiga recuperar sua senha, entre em contato com o suporte através do e-mail:  
+      Caso não consiga recuperar sua senha, entre em contato com o suporte através do e-mail:
       <strong>suporteexemplo.com</strong>
     </p>
   </div>

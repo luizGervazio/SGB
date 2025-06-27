@@ -6,6 +6,7 @@ import { AutoresComponent } from './pages/autores/autores.component';
 import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RecuperarComponent } from './pages/recuperar/recuperar.component';
+import { AlterarComponent } from './pages/alterar/alterar.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -36,5 +37,9 @@ export const routes: Routes = [
     {
         path: 'recuperar',
         component: RecuperarComponent
+    },
+    {
+        path: 'alterar',
+        component: AlterarComponent
     },
 ];

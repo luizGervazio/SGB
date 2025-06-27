@@ -1,0 +1,32 @@
+<div class="body">
+  <div class="login-container">
+    <form [formGroup]="alterarForm" (ngSubmit)="alterarSenha()">
+      <h2>Alterar Senha</h2>
+
+      <div class="form-group">
+        <label for="token">Token</label>
+        <input
+          type="text"
+          id="token"
+          formControlName="token"
+          placeholder="Digite o token recebido"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="novaSenha">Nova Senha</label>
+        <input
+          type="password"
+          id="novaSenha"
+          formControlName="novaSenha"
+          placeholder="Digite sua nova senha"
+        />
+      </div>
+
+      <button type="submit" class="btn-login">Salvar</button>
+
+      <p class="mensagem-sucesso" *ngIf="mensagem">{{ mensagem }}</p>
+      <p class="mensagem-erro" *ngIf="erro">{{ erro }}</p>
+    </form>
+  </div>
+</div>
