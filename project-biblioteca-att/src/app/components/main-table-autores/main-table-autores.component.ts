@@ -36,6 +36,10 @@ export class MainTableAutorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.sidebarService.sidebarState$.subscribe(state => {
+      this.isSidebarClosed = state;
+    });
+
   this.carregarAutores();
 
   this.autorService.getAtualizacoes().subscribe(() => {

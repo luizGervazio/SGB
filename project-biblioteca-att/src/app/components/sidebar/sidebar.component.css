@@ -166,7 +166,7 @@
 
 /* Estilizando a logo */
 .sidebar .logo {
-    width: 225px;
+    width: 200px;
     /* Ajuste conforme necessário */
     height: 80px;
     transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
