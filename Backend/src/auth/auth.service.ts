@@ -49,9 +49,8 @@ export class AuthService {
       },
     });
 
-    const resetLink = `http://localhost:3000/auth/reset-password?token=${token}`;
+    const resetLink = `${token}`;
 
-    // Enviar o link por e-mail real
     await this.emailService.sendPasswordReset(email, resetLink);
 
     return { message: 'Link de recuperação enviado por e-mail' };

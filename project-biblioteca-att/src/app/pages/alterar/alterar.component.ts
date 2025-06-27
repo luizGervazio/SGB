@@ -3,10 +3,11 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageModalComponent } from "../../messages/message-modal/message-modal.component";
 
 @Component({
   selector: 'app-alterar',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MessageModalComponent],
   templateUrl: './alterar.component.html',
   styleUrls: ['./alterar.component.css']
 })
@@ -15,6 +16,11 @@ export class AlterarComponent {
   token: string = '';
   mensagem = '';
   erro = '';
+
+  showMessageModal: boolean = false;
+  messageType: 'success' | 'error' = 'success';
+  messageTitle: string = '';
+  messageDescription: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -39,10 +45,19 @@ export class AlterarComponent {
 
     this.authService.resetPassword(token, novaSenha).subscribe({
       next: () => {
+        this.messageType = 'success';
+        this.messageTitle = 'Sua senha foi alterada com sucesso!!';
+        this.messageDescription = 'Realize o login';
+        this.showMessageModal = true;
         this.mensagem = 'Senha alterada com sucesso!';
         this.erro = '';
+        this.router.navigate(['/']);
       },
       error: () => {
+        this.messageType = 'error';
+        this.messageTitle = 'Erro ao alterar a senha!';
+        this.messageDescription = 'Porfavor verifique se o token colocado está expirado!';
+        this.showMessageModal = true;
         this.erro = 'Erro ao alterar a senha.';
         this.mensagem = '';
       }

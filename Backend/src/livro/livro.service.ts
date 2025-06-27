@@ -23,6 +23,10 @@ export class LivroService {
   }
 
   async create(createLivroDto: CreateLivroDto) {
+    if (!createLivroDto.autoresIds || createLivroDto.autoresIds.length === 0) {
+      throw new Error('Um livro deve conter pelo menos um autor.');
+    }
+
     const createLivro = await this.prisma.livro.create({
       data: {
         titulo: createLivroDto.titulo,
