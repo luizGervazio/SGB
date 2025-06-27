@@ -36,3 +36,11 @@
     </form>
   </div>
 </div>
+
+<app-message-modal
+  [isOpen]="showMessageModal"
+  [type]="messageType"
+  [title]="messageTitle"
+  [description]="messageDescription"
+  (close)="showMessageModal = false"
+></app-message-modal>

@@ -9,12 +9,13 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClienteService } from '../../services/cliente.service';
+import { MessageModalComponent } from "../../messages/message-modal/message-modal.component";
 
 
 @Component({
   selector: 'app-edit-cliente-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule,],
+  imports: [CommonModule, FormsModule, MessageModalComponent],
   templateUrl: './edit-cliente-modal.component.html',
   styleUrls: ['./edit-cliente-modal.component.css']
 })
@@ -24,6 +25,11 @@ export class EditClienteModalComponent implements OnChanges {
 
   @Output() close = new EventEmitter<void>();
   @Output() updateCliente = new EventEmitter<any>();
+
+  showMessageModal: boolean = false;
+  messageType: 'success' | 'error' = 'success';
+  messageTitle: string = '';
+  messageDescription: string = '';
 
 editedCliente: any = {};
 
@@ -57,10 +63,24 @@ editedCliente: any = {};
     next: (updated) => {
       console.log('✅ Cliente atualizado com sucesso:', updated);
       this.updateCliente.emit(updated);
+
+      // Modal de sucesso
+      this.messageType = 'success';
+      this.messageTitle = 'Cliente atualizado com sucesso!';
+      this.messageDescription = 'As informações do cliente foram atualizadas.';
+      this.showMessageModal = true;
+
       this.close.emit();
     },
     error: (err) => {
       console.error('❌ Erro ao atualizar Cliente:', err);
+
+      // Modal de erro
+      this.messageType = 'error';
+      this.messageTitle = 'Erro ao atualizar cliente';
+      this.messageDescription = 'Não foi possível atualizar o cliente. Verifique os dados.';
+      this.showMessageModal = true;
+      this.close.emit();
     }
   });
 }

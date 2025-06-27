@@ -1,0 +1,17 @@
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal-content" [ngClass]="type">
+    <div class="modal-icon">
+      <span *ngIf="type === 'success'">✔</span>
+      <span *ngIf="type === 'error'">✖</span>
+      <span *ngIf="type === 'edit'">✏️</span>
+      <span *ngIf="type === 'remove'">🗑️</span>
+    </div>
+    <h2>{{ title }}</h2>
+    <p>{{ description }}</p>
+    
+    <div class="actions">
+      <button *ngIf="type === 'remove' || type === 'edit'" class="btn-confirm" (click)="handleConfirm()">Confirmar</button>
+      <button class="btn-cancel" (click)="handleClose()">Fechar</button>
+    </div>
+  </div>
+</div>

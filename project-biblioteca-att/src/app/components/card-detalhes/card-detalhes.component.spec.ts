@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddClientModalComponent } from './add-client-modal.component';
+import { CardDetalhesComponent } from './card-detalhes.component';
 
-describe('AddClientModalComponent', () => {
-  let component: AddClientModalComponent;
-  let fixture: ComponentFixture<AddClientModalComponent>;
+describe('CardDetalhesComponent', () => {
+  let component: CardDetalhesComponent;
+  let fixture: ComponentFixture<CardDetalhesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddClientModalComponent]
+      imports: [CardDetalhesComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddClientModalComponent);
+    fixture = TestBed.createComponent(CardDetalhesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

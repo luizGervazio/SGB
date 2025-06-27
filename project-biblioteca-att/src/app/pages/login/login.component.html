@@ -1,6 +1,6 @@
 <div class="body">
   <div class="login-container">
-    <form>
+    <form (ngSubmit)="login()" [formGroup]="loginForm">
       <div class="form-group">
         <label for="email">E-mail</label>
         <input
@@ -29,3 +29,11 @@
     <a class="recuperar" href="/recuperar">Esqueci minha senha</a>
   </div>
 </div>
+
+<app-message-modal
+  [isOpen]="showMessageModal"
+  [type]="messageType"
+  [title]="messageTitle"
+  [description]="messageDescription"
+  (close)="showMessageModal = false"
+></app-message-modal>

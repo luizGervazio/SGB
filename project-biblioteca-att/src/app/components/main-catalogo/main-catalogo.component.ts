@@ -3,10 +3,11 @@ import { CardComponent } from "../card/card.component";
 import { CommonModule } from '@angular/common';
 import { LivroService } from '../../services/livro.service';
 import { AutorService } from '../../services/autor.service';
+import { CardDetalhesComponent } from '../card-detalhes/card-detalhes.component';
 
 @Component({
   selector: 'app-main-catalogo',
-  imports: [CardComponent,CommonModule],
+  imports: [CardComponent,CommonModule,CardDetalhesComponent],
   templateUrl: './main-catalogo.component.html',
   styleUrl: './main-catalogo.component.css'
 })
@@ -15,6 +16,9 @@ export class MainCatalogoComponent implements OnInit {
 isSidebarClosed: boolean = false;
 
 livros: any[] = [];
+
+livroSelecionado: any = null;
+
 
 showRemoveBookModal: boolean = false;
 bookToRemove: any = null;
@@ -57,5 +61,9 @@ livrosFiltrados() {
     );
 }
 
+abrirDetalhes(livro: any) {
+ this.livroSelecionado = livro;
+}
 
+  
 }
