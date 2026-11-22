@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class EmprestimoService {
-  private apiUrl = 'http://localhost:3000/emprestismo';
+  private apiUrl = '/api/emprestismo';
 
   // 🔁 Notificador reativo
   private emprestimosAtualizados$ = new BehaviorSubject<void>(undefined);
@@ -42,11 +42,11 @@ deleteEmprestimo(id: number): Observable<any> {
 
   // Para buscar os clientes
   getClientes(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/cliente');
+    return this.http.get<any[]>('/api/cliente');
   }
 
   // Para buscar os livros
   getLivros(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/livro');
+    return this.http.get<any[]>('/api/livro');
   }
 }

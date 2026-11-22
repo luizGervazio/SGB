@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AutorService {
-  private apiUrl = 'http://localhost:3000/autor';
+  private apiUrl = '/api/autor';
 
   // 🔁 Subject para notificar alterações
   private autoresAtualizados$ = new BehaviorSubject<void>(undefined);

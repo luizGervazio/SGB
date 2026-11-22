@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ClienteService {
-  private apiUrl = 'http://localhost:3000/cliente';
+  private apiUrl = '/api/cliente';
 
   // 🔁 Notificador reativo
   private clientesAtualizados$ = new BehaviorSubject<void>(undefined);

@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = '/api/auth';
 
   // Notificação para quando o login for bem-sucedido
   private loginStatus$ = new BehaviorSubject<boolean>(this.isLoggedIn());

@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class LivroService {
-  private apiUrl = 'http://localhost:3000/livro';
+  private apiUrl = '/api/livro';
 
   private livrosAtualizados$ = new BehaviorSubject<void>(undefined);
 
