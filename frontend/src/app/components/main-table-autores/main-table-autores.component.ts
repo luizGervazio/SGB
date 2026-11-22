@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { SidebarService } from '../../services/sidebar.service';
 import { RemoveAutorModalComponent } from '../../modals/remove-autor-modal/remove-autor-modal.component';
@@ -10,6 +11,7 @@ import { AutorService } from '../../services/autor.service';
   selector: 'app-main-table-autor',
   standalone: true,
   imports: [
+    LucideAngularModule,
     CommonModule,
     FormsModule,
     RemoveAutorModalComponent,
@@ -19,7 +21,7 @@ import { AutorService } from '../../services/autor.service';
   styleUrls: ['./main-table-autores.component.css']
 })
 export class MainTableAutorComponent implements OnInit {
-  filtro: string = '';
+  @Input() filtro: string = '';
   isSidebarClosed: boolean = false;
 
   autores: any[] = [];
@@ -61,11 +63,22 @@ carregarAutores(): void {
   }
 
   autoresFiltrados() {
-    const texto = this.filtro.toLowerCase();
-    return this.autores.filter(c =>
-      c.nome.toLowerCase().includes(texto) 
+    const texto = (this.filtro || '').toLowerCase().trim();
+    if (!texto) return this.autores;
+    return this.autores.filter((a) =>
+      [a.id?.toString(), a.nome].some((campo) => campo?.toLowerCase().includes(texto)),
     );
   }
+
+  /** Iniciais para o avatar (ex.: "Ana Souza" -> "AS") */
+  iniciais(nome?: string): string {
+    if (!nome) return '?';
+    const partes = nome.trim().split(/\s+/);
+    const primeira = partes[0]?.[0] ?? '';
+    const ultima = partes.length > 1 ? partes[partes.length - 1][0] : '';
+    return (primeira + ultima).toUpperCase();
+  }
+
 
   // Edição
   openEditAutorModal(autores: any) {

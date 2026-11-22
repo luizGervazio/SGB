@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { SidebarService } from '../../services/sidebar.service';
 import { RemoveClienteModalComponent } from '../../modals/remove-cliente-modal/remove-cliente-modal.component';
@@ -11,6 +12,7 @@ import { ClienteService } from '../../services/cliente.service';
   selector: 'app-main-table-cliente',
   standalone: true,
   imports: [
+    LucideAngularModule,
     CommonModule,
     FormsModule,
     RemoveClienteModalComponent,
@@ -20,7 +22,7 @@ import { ClienteService } from '../../services/cliente.service';
   styleUrls: ['./main-table-cliente.component.css']
 })
 export class MainTableComponent implements OnInit {
-  filtro: string = '';
+  @Input() filtro: string = '';
   isSidebarClosed: boolean = false;
 
   clientes: any[] = [];
@@ -55,18 +57,23 @@ export class MainTableComponent implements OnInit {
   }
 
   clientesFiltrados() {
-    const texto = this.filtro.toLowerCase();
-    return this.clientes.filter(c =>
-      c.nome.toLowerCase().includes(texto) ||
-      c.email.toLowerCase().includes(texto) ||
-      c.telefone.toLowerCase().includes(texto) ||
-      c.cpf.toLowerCase().includes(texto) ||
-      c.endereco.toLowerCase().includes(texto) ||
-      c.numero.toString().includes(texto) ||
-      c.cidade.toLowerCase().includes(texto) ||
-      c.status.toLowerCase().includes(texto)
+    const texto = (this.filtro || '').toLowerCase().trim();
+    if (!texto) return this.clientes;
+    return this.clientes.filter((c) =>
+      [c.id?.toString(), c.nome, c.email, c.telefone, c.cpf, c.cidade, c.status]
+        .some((campo) => campo?.toLowerCase().includes(texto)),
     );
   }
+
+  /** Iniciais para o avatar (ex.: "Ana Souza" -> "AS") */
+  iniciais(nome?: string): string {
+    if (!nome) return '?';
+    const partes = nome.trim().split(/\s+/);
+    const primeira = partes[0]?.[0] ?? '';
+    const ultima = partes.length > 1 ? partes[partes.length - 1][0] : '';
+    return (primeira + ultima).toUpperCase();
+  }
+
 
   // Edição
   openEditClienteModal(cliente: any) {

@@ -1,46 +1,66 @@
-<div class="main-content" [class.closed]="isSidebarClosed">
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Telefone</th>
-          <th>CPF</th>
-          <th>Endereço</th>
-          <th>Número</th>
-          <th>Cidade</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cliente of clientesFiltrados()">
-          <td>{{ cliente.id }}</td>
-          <td>{{ cliente.nome }}</td>
-          <td>{{ cliente.email }}</td>
-          <td>{{ cliente.telefone }}</td>
-          <td>{{ cliente.cpf }}</td>
-          <td>{{ cliente.endereco }}</td>
-          <td>{{ cliente.numero }}</td>
-          <td>{{ cliente.cidade }}</td>
-          <td>{{ cliente.status }}</td>
-          <td>
-            <div class="action-buttons">
-              <button (click)="openEditClienteModal(cliente)" class="btn btn-warning">
-                <i class="fas fa-edit"></i> Editar
-              </button>
-              <button (click)="openRemoveClienteModal(cliente)" class="btn btn-danger">
-                <i class="fas fa-trash"></i> Remover
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<section class="page-body" [class.closed]="isSidebarClosed">
+  <div class="card table-card">
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="col-id">ID</th>
+            <th>Cliente</th>
+            <th>Telefone</th>
+            <th>CPF</th>
+            <th>Endereço</th>
+            <th>Status</th>
+            <th class="col-actions">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientesFiltrados()">
+            <td class="col-id">#{{ cliente.id }}</td>
+            <td>
+              <div class="person">
+                <span class="avatar">{{ iniciais(cliente.nome) }}</span>
+                <div>
+                  <span class="cell-strong">{{ cliente.nome }}</span>
+                  <span class="cell-sub">{{ cliente.email }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="num">{{ cliente.telefone }}</td>
+            <td class="num">{{ cliente.cpf }}</td>
+            <td>
+              {{ cliente.endereco }}, {{ cliente.numero }}
+              <span class="cell-sub">{{ cliente.cidade }}</span>
+            </td>
+            <td>
+              <span class="badge" [ngClass]="cliente.status?.toLowerCase() === 'ativo' ? 'badge-success' : 'badge-neutral'">
+                {{ cliente.status }}
+              </span>
+            </td>
+            <td class="col-actions">
+              <div class="row-actions">
+                <button class="icon-btn edit" title="Editar cliente" (click)="openEditClienteModal(cliente)">
+                  <lucide-icon name="pencil" [size]="17"></lucide-icon>
+                </button>
+                <button class="icon-btn delete" title="Remover cliente" (click)="openRemoveClienteModal(cliente)">
+                  <lucide-icon name="trash-2" [size]="17"></lucide-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="clientesFiltrados().length === 0">
+            <td colspan="7">
+              <div class="empty-state">
+                <lucide-icon name="inbox" [size]="40" [strokeWidth]="1.5"></lucide-icon>
+                <strong>Nenhum cliente encontrado</strong>
+                {{ filtro ? 'Tente buscar por outro termo.' : 'Cadastre o primeiro em Novo cliente.' }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</section>
 
 <app-remove-cliente-modal
   [isOpen]="showRemoveClienteModal"
@@ -49,7 +69,6 @@
   (remove)="removeCliente($event)"
 ></app-remove-cliente-modal>
 
-<!-- Modal de Edição -->
 <app-edit-cliente-modal
   [isOpen]="showEditClienteModal"
   [cliente]="selectedCliente"

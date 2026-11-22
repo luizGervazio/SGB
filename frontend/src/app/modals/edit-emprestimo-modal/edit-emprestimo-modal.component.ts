@@ -7,6 +7,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { EmprestimoService } from '../../services/emprestimo.service';
 import { MessageModalComponent } from "../../messages/message-modal/message-modal.component";
@@ -14,7 +15,7 @@ import { MessageModalComponent } from "../../messages/message-modal/message-moda
 @Component({
   selector: 'app-edit-emprestimo-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, MessageModalComponent],
+  imports: [LucideAngularModule, CommonModule, FormsModule, MessageModalComponent],
   templateUrl: './edit-emprestimo-modal.component.html',
   styleUrls: ['./edit-emprestimo-modal.component.css']
 })

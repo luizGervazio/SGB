@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { LucideAngularModule } from 'lucide-angular';
+import { AuthBrandComponent } from '../../components/auth-brand/auth-brand.component';
 import { MessageModalComponent } from "../../messages/message-modal/message-modal.component";
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MessageModalComponent], // ✅ aqui!
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, LucideAngularModule, AuthBrandComponent, MessageModalComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

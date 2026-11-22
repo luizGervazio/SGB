@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { EmprestimoService } from '../../services/emprestimo.service';
 import { MessageModalComponent } from "../../messages/message-modal/message-modal.component"; // importa o service
 
 @Component({
   selector: 'app-remove-Emprestimo-modal',
   standalone: true,
-  imports: [CommonModule, MessageModalComponent],
+  imports: [LucideAngularModule, CommonModule, MessageModalComponent],
   templateUrl: './remove-emprestimo-modal.component.html',
   styleUrls: ['./remove-emprestimo-modal.component.css']
 })

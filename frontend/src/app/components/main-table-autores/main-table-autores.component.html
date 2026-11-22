@@ -1,32 +1,48 @@
-<div class="main-content" [class.closed]="isSidebarClosed">
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let autor of autoresFiltrados()">
-          <td>{{ autor.id }}</td>
-          <td>{{ autor.nome }}</td>
-          <td>
-            <div class="action-buttons">
-              <button (click)="openEditAutorModal(autor)" class="btn btn-warning">
-                <i class="fas fa-edit"></i> Editar
-              </button>
-              <button (click)="openRemoveAutorModal(autor)" class="btn btn-danger">
-                <i class="fas fa-trash"></i> Remover
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<section class="page-body" [class.closed]="isSidebarClosed">
+  <div class="card table-card">
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="col-id">ID</th>
+            <th>Autor</th>
+            <th class="col-actions">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let autor of autoresFiltrados()">
+            <td class="col-id">#{{ autor.id }}</td>
+            <td>
+              <div class="person">
+                <span class="avatar">{{ iniciais(autor.nome) }}</span>
+                <span class="cell-strong">{{ autor.nome }}</span>
+              </div>
+            </td>
+            <td class="col-actions">
+              <div class="row-actions">
+                <button class="icon-btn edit" title="Editar autor" (click)="openEditAutorModal(autor)">
+                  <lucide-icon name="pencil" [size]="17"></lucide-icon>
+                </button>
+                <button class="icon-btn delete" title="Remover autor" (click)="openRemoveAutorModal(autor)">
+                  <lucide-icon name="trash-2" [size]="17"></lucide-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="autoresFiltrados().length === 0">
+            <td colspan="3">
+              <div class="empty-state">
+                <lucide-icon name="inbox" [size]="40" [strokeWidth]="1.5"></lucide-icon>
+                <strong>Nenhum autor encontrado</strong>
+                {{ filtro ? 'Tente buscar por outro termo.' : 'Cadastre o primeiro em Novo autor.' }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</section>
 
 <app-remove-autor-modal
   [isOpen]="showRemoveAutorModal"
@@ -35,7 +51,6 @@
   (remove)="removeAutor($event)"
 ></app-remove-autor-modal>
 
-<!-- Modal de Edição -->
 <app-edit-autor-modal
   [isOpen]="showEditAutorModal"
   [autor]="selectedAutor"

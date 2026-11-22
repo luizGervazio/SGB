@@ -1,34 +1,50 @@
-<div class="body">
-  <div class="login-container">
-    <form [formGroup]="alterarForm" (ngSubmit)="alterarSenha()">
-      <h2>Alterar Senha</h2>
+<div class="auth-page">
+  <app-auth-brand></app-auth-brand>
 
-      <div class="form-group">
-        <label for="token">Token</label>
-        <input
-          type="text"
-          id="token"
-          formControlName="token"
-          placeholder="Digite o token recebido"
-        />
-      </div>
+  <main class="auth-panel">
+    <div class="auth-card">
+      <img src="app/assets/logo.png" alt="Library Manager" class="auth-logo" />
+      <h2>Definir nova senha</h2>
+      <p class="subtitle">Cole o token recebido por e-mail e escolha uma nova senha.</p>
 
-      <div class="form-group">
-        <label for="novaSenha">Nova Senha</label>
-        <input
-          type="password"
-          id="novaSenha"
-          formControlName="novaSenha"
-          placeholder="Digite sua nova senha"
-        />
-      </div>
+      <form [formGroup]="alterarForm" (ngSubmit)="alterarSenha()">
+        <div class="field">
+          <label for="token">Token</label>
+          <div class="input-icon">
+            <lucide-icon name="key-round" [size]="18"></lucide-icon>
+            <input id="token" class="input" type="text" formControlName="token" placeholder="Token recebido por e-mail" />
+          </div>
+        </div>
 
-      <button type="submit" class="btn-login">Salvar</button>
+        <div class="field">
+          <label for="novaSenha">Nova senha</label>
+          <div class="input-icon">
+            <lucide-icon name="lock" [size]="18"></lucide-icon>
+            <input id="novaSenha" class="input" type="password" formControlName="novaSenha" placeholder="••••••••" autocomplete="new-password" />
+          </div>
+        </div>
 
-      <p class="mensagem-sucesso" *ngIf="mensagem">{{ mensagem }}</p>
-      <p class="mensagem-erro" *ngIf="erro">{{ erro }}</p>
-    </form>
-  </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+          <lucide-icon name="circle-check" [size]="18"></lucide-icon>
+          Salvar nova senha
+        </button>
+
+        <div class="notice success" *ngIf="mensagem">
+          <lucide-icon name="circle-check" [size]="18"></lucide-icon>
+          <span>{{ mensagem }}</span>
+        </div>
+        <div class="notice error" *ngIf="erro">
+          <lucide-icon name="circle-x" [size]="18"></lucide-icon>
+          <span>{{ erro }}</span>
+        </div>
+      </form>
+
+      <a routerLink="/login" class="back-link">
+        <lucide-icon name="arrow-left" [size]="16"></lucide-icon>
+        Voltar para o login
+      </a>
+    </div>
+  </main>
 </div>
 
 <app-message-modal

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { SidebarService } from '../../services/sidebar.service';
 import { AddEmprestimoModalComponent  } from '../../modals/add-emprestimo-modal/add-emprestimo-modal.component';
@@ -8,12 +9,14 @@ import { EmprestimoService } from '../../services/emprestimo.service'; // import
 @Component({
   selector: 'app-fixed-header-emprestimo',
   standalone: true,
-  imports: [CommonModule, FormsModule,AddEmprestimoModalComponent ],
+  imports: [CommonModule, LucideAngularModule, FormsModule,AddEmprestimoModalComponent ],
   templateUrl: './fixed-header-emprestimo.component.html',
   styleUrls: ['./fixed-header-emprestimo.component.css']
 })
 export class FixedHeaderComponentEmprestimo implements OnInit {
   @Input() title: string = 'Título';
+  @Input() subtitle: string = '';
+  @Input() icon: string = 'book-open';
   @Input() placeholder: string = 'Buscar...';
   @Input() addButtonLabel: string = 'Adicionar';
 

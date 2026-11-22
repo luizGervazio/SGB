@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { ClienteService } from '../../services/cliente.service';
 import { MessageModalComponent } from "../../messages/message-modal/message-modal.component";
@@ -7,7 +8,7 @@ import { MessageModalComponent } from "../../messages/message-modal/message-moda
 @Component({
   selector: 'app-add-client-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, MessageModalComponent],
+  imports: [LucideAngularModule, CommonModule, FormsModule, MessageModalComponent],
   templateUrl: './add-client-modal.component.html',
   styleUrls: ['./add-client-modal.component.css']
 })

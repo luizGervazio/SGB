@@ -8,6 +8,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { LivroService } from '../../services/livro.service';
 import { AutorService } from '../../services/autor.service';
@@ -16,7 +17,7 @@ import { MessageModalComponent } from "../../messages/message-modal/message-moda
 @Component({
   selector: 'app-edit-book-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, MessageModalComponent],
+  imports: [LucideAngularModule, CommonModule, FormsModule, MessageModalComponent],
   templateUrl: './edit-book-modal.component.html',
   styleUrls: ['./edit-book-modal.component.css']
 })

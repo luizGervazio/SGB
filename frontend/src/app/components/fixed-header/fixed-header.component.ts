@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { SidebarService } from '../../services/sidebar.service';
 import { AddBookModalComponent } from '../../modals/add-book-modal/add-book-modal.component';
@@ -7,12 +8,14 @@ import { AddBookModalComponent } from '../../modals/add-book-modal/add-book-moda
 @Component({
   selector: 'app-fixed-header',
   standalone: true,
-  imports: [CommonModule, FormsModule, AddBookModalComponent], // ✅ import do modal
+  imports: [CommonModule, LucideAngularModule, FormsModule, AddBookModalComponent], // ✅ import do modal
   templateUrl: './fixed-header.component.html',
   styleUrls: ['./fixed-header.component.css']
 })
 export class FixedHeaderComponent implements OnInit {
   @Input() title: string = 'Título';
+  @Input() subtitle: string = '';
+  @Input() icon: string = 'book-open';
   @Input() placeholder: string = 'Buscar...';
   @Input() addButtonLabel: string = 'Adicionar';
 

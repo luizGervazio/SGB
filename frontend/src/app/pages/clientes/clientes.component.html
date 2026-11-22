@@ -1,14 +1,12 @@
 <app-sidebar></app-sidebar>
-<router-outlet></router-outlet>
 
 <app-fixed-header-cliente
-  [title]="'Lista de Cliente'"
-  [placeholder]="'buscar Cliente por ID ou Nome do Cliente...'"
-  [addButtonLabel]="'Criar Cliente'"
-  (onSearch)="buscarCliente($event)"
-  (onAdd)="abrirModalCliente()"
+  title="Clientes"
+  subtitle="Leitores cadastrados"
+  icon="users"
+  placeholder="Buscar por nome, e-mail, CPF ou cidade..."
+  addButtonLabel="Novo cliente"
+  (onSearch)="termo = $event"
 ></app-fixed-header-cliente>
 
-<div class="main-content">
-  <app-main-table-cliente></app-main-table-cliente>
-</div>
+<app-main-table-cliente [filtro]="termo"></app-main-table-cliente>

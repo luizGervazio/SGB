@@ -1,33 +1,45 @@
-<div class="body">
-  <div class="login-container">
-    <form (ngSubmit)="login()" [formGroup]="loginForm">
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input
-          id="email"
-          type="email"
-          formControlName="email"
-          placeholder="Digite seu e-mail"
-          required
-        />
-      </div>
+<div class="auth-page">
+  <app-auth-brand></app-auth-brand>
 
-      <div class="form-group">
-        <label for="senha">Senha</label>
-        <input
-          id="senha"
-          type="password"
-          formControlName="senha"
-          placeholder="Digite sua senha"
-          required
-        />
-      </div>
+  <main class="auth-panel">
+    <div class="auth-card">
+      <img src="app/assets/logo.png" alt="Library Manager" class="auth-logo" />
+      <h2>Bem-vindo de volta</h2>
+      <p class="subtitle">Entre com sua conta para acessar o painel.</p>
 
-      <button type="submit" class="btn-login">Entrar</button>
-    </form>
+      <form (ngSubmit)="login()" [formGroup]="loginForm">
+        <div class="field">
+          <label for="email">E-mail</label>
+          <div class="input-icon">
+            <lucide-icon name="mail" [size]="18"></lucide-icon>
+            <input id="email" class="input" type="email" formControlName="email" placeholder="voce@exemplo.com" autocomplete="username" required />
+          </div>
+        </div>
 
-    <a class="recuperar" href="/recuperar">Esqueci minha senha</a>
-  </div>
+        <div class="field">
+          <div class="row-between">
+            <label for="senha" class="field-label">Senha</label>
+            <a routerLink="/recuperar" class="link">Esqueci minha senha</a>
+          </div>
+          <div class="input-icon">
+            <lucide-icon name="lock" [size]="18"></lucide-icon>
+            <input id="senha" class="input" type="password" formControlName="senha" placeholder="••••••••" autocomplete="current-password" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+          <lucide-icon name="log-in" [size]="18"></lucide-icon>
+          Entrar
+        </button>
+      </form>
+
+      <div class="divider">ou</div>
+      <a routerLink="/catalogo" class="btn btn-secondary btn-block">
+        <lucide-icon name="layout-grid" [size]="18"></lucide-icon>
+        Ver catálogo público
+      </a>
+    </div>
+  </main>
 </div>
 
 <app-message-modal

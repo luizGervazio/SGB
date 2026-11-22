@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { EmprestimoService } from '../../services/emprestimo.service';
 import { MessageModalComponent } from "../../messages/message-modal/message-modal.component";
@@ -7,7 +8,7 @@ import { MessageModalComponent } from "../../messages/message-modal/message-moda
 @Component({
   selector: 'app-add-emprestimo-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, MessageModalComponent],
+  imports: [LucideAngularModule, CommonModule, FormsModule, MessageModalComponent],
   templateUrl: './add-emprestimo-modal.component.html',
   styleUrls: ['./add-emprestimo-modal.component.css'],
 })
@@ -28,7 +29,7 @@ export class AddEmprestimoModalComponent {
     clienteId: null,
     dataEmprestimo: '',
     dataDevolucao: '',
-    atraso: true,
+    atraso: false,
     statusEmprestismo: true
   };
 

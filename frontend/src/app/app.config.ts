@@ -1,9 +1,12 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { routes } from './app.routes'; // ajuste conforme seu caminho
+import { LucideAngularModule } from 'lucide-angular';
+import { routes } from './app.routes';
+import { APP_ICONS } from './shared/icons';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes) // 🔐 ESSENCIAL para aplicar rotas e guards
-  ]
+    provideRouter(routes),
+    importProvidersFrom(LucideAngularModule.pick(APP_ICONS)),
+  ],
 };

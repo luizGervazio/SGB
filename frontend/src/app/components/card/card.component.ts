@@ -1,16 +1,22 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
+import { capaLivro, nomesAutores } from '../../shared/capa';
+
 @Component({
   selector: 'app-card',
-  imports: [CommonModule],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+  styleUrl: './card.component.css',
 })
 export class CardComponent {
   @Input() livro!: any;
-  get nomesAutores(): string {
-  return this.livro?.autores?.map((a: any) => a.nome).join(', ') || 'Autor desconhecido';  
-}
-  
+
+  get autores(): string {
+    return nomesAutores(this.livro);
+  }
+
+  get capa(): string {
+    return capaLivro(this.livro);
+  }
 }
