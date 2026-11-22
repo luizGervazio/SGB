@@ -71,7 +71,7 @@ A API só é acessível pela rede interna do Compose; o único ponto de entrada 
 | Grupo não-privilegiado | `addgroup -S -g 10001 appgroup` |
 | Usuário não-root | `adduser -S -D -H -u 10001 -G appgroup -s /sbin/nologin appuser` |
 | Isolamento de diretórios | `/app/data` criado com `chown appuser:appgroup` e `chmod 0700`; código e `node_modules` pertencem ao root (só leitura para o appuser) |
-| `USER` ativo | `USER appuser` antes do `CMD` |
+| `USER` ativo | `USER 10001:10001` (appuser:appgroup) antes do `CMD`; UID numérico conforme a regra DL3066 do Hadolint, e `whoami` continua retornando `appuser` |
 
 ### `docker-compose.yml` (serviço `api`)
 
@@ -127,7 +127,7 @@ docker run --rm -i hadolint/hadolint < api/Dockerfile
 Get-Content -Raw api\Dockerfile | docker run --rm -i hadolint/hadolint
 ```
 
-Esperado: nenhuma saída e exit code 0.
+Esperado: nenhuma saída e exit code 0. Logs reais da execução ficam em `evidencias/`.
 
 **2. Usuário non-root**
 
