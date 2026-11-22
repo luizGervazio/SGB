@@ -1,0 +1,20 @@
+﻿# Gravação no volume do SQLite (/app/data/app.db)
+# 2026-11-22 14:05:37
+
+Antes:
+total 72
+drwx------    2 appuser  appgroup      4096 Nov 22 17:05 .
+drwxr-xr-x    1 root     root          4096 Nov 22 17:04 ..
+-rw-r--r--    1 appuser  appgroup     65536 Nov 22 17:05 app.db
+autores=1 livros=0 clientes=0
+
+POST http://localhost:8080/api/autor  { nome: 'Autor teste 140536' }
+{"id":2,"nome":"Autor teste 140536"}
+
+Depois:
+total 72
+drwx------    2 appuser  appgroup      4096 Nov 22 17:05 .
+drwxr-xr-x    1 root     root          4096 Nov 22 17:04 ..
+-rw-r--r--    1 appuser  appgroup     65536 Nov 22 17:05 app.db
+autores=2 livros=0 clientes=0
+

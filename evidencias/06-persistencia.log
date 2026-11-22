@@ -1,0 +1,12 @@
+﻿# Persistência: dados sobrevivem à recriação do contêiner
+# 2026-11-22 14:05:45
+
+Recriando o contêiner backend_api (o volume nomeado é mantido)...
+ Container backend_api Recreate 
+ Container backend_api Recreated 
+ Container backend_api Starting 
+ Container backend_api Started 
+ Container backend_api Waiting 
+ Container backend_api Healthy 
+autores=2 livros=0 clientes=0
+

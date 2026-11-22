@@ -1,0 +1,7 @@
+﻿# Configuração de segurança aplicada ao contêiner
+# 2026-11-22 14:05:36
+
+User=10001:10001  ReadonlyRootfs=true  CapDrop=[ALL]  SecurityOpt=[no-new-privileges:true]  Tmpfs=map[/tmp:]
+volume sgb_sqlite_data -> /app/data (RW=true)
+
+

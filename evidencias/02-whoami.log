@@ -1,0 +1,6 @@
+﻿# docker exec backend_api whoami
+# 2026-11-22 14:05:35
+
+appuser
+uid=10001(appuser) gid=10001(appgroup) groups=10001(appgroup)
+
