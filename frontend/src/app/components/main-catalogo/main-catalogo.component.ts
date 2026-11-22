@@ -1,69 +1,83 @@
 import { Component, OnInit } from '@angular/core';
-import { CardComponent } from "../card/card.component";
 import { CommonModule } from '@angular/common';
-import { LivroService } from '../../services/livro.service';
-import { AutorService } from '../../services/autor.service';
+import { FormsModule } from '@angular/forms';
+import { LucideAngularModule } from 'lucide-angular';
+import { CardComponent } from '../card/card.component';
 import { CardDetalhesComponent } from '../card-detalhes/card-detalhes.component';
+import { LivroService } from '../../services/livro.service';
+import { nomesAutores } from '../../shared/capa';
+
+type Ordem = 'titulo' | 'autor' | 'recentes' | 'antigos';
 
 @Component({
   selector: 'app-main-catalogo',
-  imports: [CardComponent,CommonModule,CardDetalhesComponent],
+  imports: [CommonModule, FormsModule, LucideAngularModule, CardComponent, CardDetalhesComponent],
   templateUrl: './main-catalogo.component.html',
-  styleUrl: './main-catalogo.component.css'
+  styleUrl: './main-catalogo.component.css',
 })
 export class MainCatalogoComponent implements OnInit {
-  filtro: string = '';
-isSidebarClosed: boolean = false;
+  filtro = '';
+  categoria = '';
+  ordem: Ordem = 'titulo';
 
-livros: any[] = [];
+  livros: any[] = [];
+  livroSelecionado: any = null;
 
-livroSelecionado: any = null;
+  constructor(private livroService: LivroService) {}
 
-
-showRemoveBookModal: boolean = false;
-bookToRemove: any = null;
-
-showEditBookModal: boolean = false;
-selectedBook: any = null;
-
-constructor(
-  private autorService: AutorService,
-  private livroService: LivroService
-) {}
-
-categorias: string[] = [];
-
-ngOnInit(): void {
-  this.carregarLivros();
-
-  this.livroService.getAtualizacoes().subscribe(() => {
-    console.log('📚 Atualização recebida no catálogo!');
+  ngOnInit(): void {
     this.carregarLivros();
-});
+    this.livroService.getAtualizacoes().subscribe(() => this.carregarLivros());
+  }
 
-}
-
-carregarLivros(): void {
+  carregarLivros(): void {
     this.livroService.getLivros().subscribe((res) => {
       this.livros = res;
     });
   }
 
-livrosFiltrados() {
-  const texto = this.filtro.toLowerCase();
+  /** Só livros disponíveis aparecem no catálogo público */
+  private get disponiveis(): any[] {
+    return this.livros.filter((livro) => livro.disponivel);
+  }
 
-  return this.livros
-    .filter(livro => livro.disponivel) // Mostra apenas os disponíveis
-    .filter(livro =>
-      livro.titulo?.toLowerCase().includes(texto) ||
-      (livro.autores?.map((a: any) => a.nome).join(', ') || '').toLowerCase().includes(texto) ||
-      livro.genero?.toLowerCase().includes(texto)
-    );
-}
+  get totalDisponiveis(): number {
+    return this.disponiveis.length;
+  }
 
-abrirDetalhes(livro: any) {
- this.livroSelecionado = livro;
-}
+  get categorias(): string[] {
+    const generos = this.disponiveis.map((l) => l.genero).filter(Boolean);
+    return [...new Set<string>(generos)].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+  }
 
-  
+  livrosFiltrados(): any[] {
+    const texto = this.filtro.toLowerCase().trim();
+
+    const lista = this.disponiveis.filter((livro) => {
+      const casaCategoria = !this.categoria || livro.genero === this.categoria;
+      const casaTexto =
+        !texto ||
+        [livro.titulo, livro.genero, nomesAutores(livro)].some((campo) =>
+          campo?.toLowerCase().includes(texto),
+        );
+      return casaCategoria && casaTexto;
+    });
+
+    const comparar: Record<Ordem, (a: any, b: any) => number> = {
+      titulo: (a, b) => (a.titulo || '').localeCompare(b.titulo || '', 'pt-BR'),
+      autor: (a, b) => nomesAutores(a).localeCompare(nomesAutores(b), 'pt-BR'),
+      recentes: (a, b) => (b.ano || 0) - (a.ano || 0),
+      antigos: (a, b) => (a.ano || 0) - (b.ano || 0),
+    };
+    return [...lista].sort(comparar[this.ordem]);
+  }
+
+  limparFiltros(): void {
+    this.filtro = '';
+    this.categoria = '';
+  }
+
+  abrirDetalhes(livro: any): void {
+    this.livroSelecionado = livro;
+  }
 }

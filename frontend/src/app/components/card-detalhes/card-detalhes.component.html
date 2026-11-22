@@ -1,42 +1,48 @@
-<!-- livro-detalhes.component.html -->
-<div class="overlay">
-  <div class="modal">
-    <!-- Header -->
-    <div class="modal-header">
-      <div class="header-grid">
-        <button class="close-btn" (click)="onClose()">&times;</button>
-        <div class="capa-livro">
-          <div class="capa-bg">
-            <div class="capa-icone">📚</div>
-            <div class="capa-texto">Capa do Livro</div>
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal detalhes" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+    <button class="icon-btn fechar" type="button" title="Fechar" (click)="onClose()">
+      <lucide-icon name="x" [size]="20"></lucide-icon>
+    </button>
+
+    <div class="detalhes-grid">
+      <div class="capa" [style.background]="capa">
+        <lucide-icon name="book-open" [size]="28" [strokeWidth]="1.75"></lucide-icon>
+        <span class="capa-titulo">{{ livro.titulo }}</span>
+        <span class="capa-autor">{{ autores }}</span>
+      </div>
+
+      <div class="conteudo">
+        <span class="badge badge-success">Disponível para empréstimo</span>
+        <h2>{{ livro.titulo }}</h2>
+        <p class="autor">
+          <lucide-icon name="user-round" [size]="16"></lucide-icon>
+          {{ autores }}
+        </p>
+
+        <dl class="ficha">
+          <div>
+            <dt><lucide-icon name="tag" [size]="15"></lucide-icon> Gênero</dt>
+            <dd>{{ livro.genero }}</dd>
           </div>
-        </div>
-        <div class="livro-info">
-          <h2 class="titulo">{{ livro.titulo }}</h2>
-          <div class="info-line">
-            <span class="icon">👤</span>
-            <span>{{ nomesAutores  }}</span>
+          <div>
+            <dt><lucide-icon name="calendar" [size]="15"></lucide-icon> Ano</dt>
+            <dd>{{ livro.ano }}</dd>
           </div>
-          <div class="info-line">
-            <span class="icon">📅</span>
-            <span>{{ livro.ano }}</span>
+          <div>
+            <dt><lucide-icon name="file-text" [size]="15"></lucide-icon> Páginas</dt>
+            <dd>{{ livro.paginas }}</dd>
           </div>
-          <div class="info-line">
-            <span class="icon">🏷️</span>
-            <span>{{ livro.genero }}</span>
+          <div>
+            <dt><lucide-icon name="building-2" [size]="15"></lucide-icon> Editora</dt>
+            <dd>{{ livro.editora }}</dd>
           </div>
+        </dl>
+
+        <div class="notice info">
+          <lucide-icon name="circle-alert" [size]="18"></lucide-icon>
+          <span>Para retirar este livro, procure o balcão da biblioteca com seu cadastro de cliente.</span>
         </div>
       </div>
-    </div>
-
-    <!-- Descrição e Detalhes -->
-    <div class="modal-body">
-      <div class="detalhes">
-        <h4>Detalhes</h4>
-        <div class="detalhe-item">
-          <span>Páginas:</span>
-          <strong>{{ livro.paginas }}</strong>
-        </div>
     </div>
   </div>
 </div>

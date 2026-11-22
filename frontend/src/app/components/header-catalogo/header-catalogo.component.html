@@ -1,18 +1,21 @@
-<header class="header-catalogo">
-  <div class="overlay"></div>
-  <div class="header-container">
-    <div class="header-content">
-      <div class="header-title">
-        <div class="icon-box">
-        </div>
-        <div>
-          <h1 class="titulo">Catálogo</h1>
-          <p class="subtitulo">Sua livraria sustentável</p>
-        </div>
-      </div>
-      <div class="resultado-box">
-        <span class="resultado-text">{{ totalLivros }} livros encontrados</span>
-      </div>
-    </div>
+<header class="catalogo-hero">
+  <nav class="hero-nav">
+    <a routerLink="/catalogo" class="hero-brand">
+      <span class="mark"><lucide-icon name="library" [size]="20"></lucide-icon></span>
+      SGB <span class="sep">/</span> <span class="muted">Catálogo</span>
+    </a>
+    <a routerLink="/login" class="btn btn-accent">
+      <lucide-icon name="log-in" [size]="18"></lucide-icon>
+      Área administrativa
+    </a>
+  </nav>
+
+  <div class="hero-content">
+    <span class="hero-pill">
+      <lucide-icon name="book-copy" [size]="16"></lucide-icon>
+      {{ totalLivros }} {{ totalLivros === 1 ? 'livro disponível' : 'livros disponíveis' }}
+    </span>
+    <h1>Encontre sua próxima leitura</h1>
+    <p>Confira os títulos do acervo disponíveis para empréstimo e veja os detalhes de cada livro.</p>
   </div>
 </header>

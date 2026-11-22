@@ -1,173 +1,118 @@
-.overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  z-index: 1000;
+.detalhes {
+  max-width: 760px;
+  overflow: hidden;
 }
 
-.modal {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(6px);
-  border-radius: 1.5rem;
-  width: 100%;
-  max-width: 900px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 165, 0, 0.3);
-}
-
-.modal-header {
-  position: relative;
-  background: linear-gradient(to right, #f97316, #fbbf24);
-  color: white;
-  padding: 2rem;
-}
-
-.close-btn {
+.fechar {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: white;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background: var(--white);
 }
 
-.header-grid {
+.detalhes-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
-  align-items: center;
+  grid-template-columns: 260px minmax(0, 1fr);
 }
 
-.capa-livro {
-  display: flex;
-  justify-content: center;
-}
-
-.capa-bg {
-  width: 8rem;
-  height: 12rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 1rem;
+.capa {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to bottom right, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+  justify-content: flex-end;
+  gap: 8px;
+  min-height: 360px;
+  padding: 28px 24px 28px 36px;
+  color: var(--white);
 }
 
-.capa-icone {
-  font-size: 3rem;
+.capa::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 16px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent);
 }
 
-.capa-texto {
-  font-size: 0.9rem;
+.capa lucide-icon {
+  margin-bottom: auto;
+  opacity: 0.8;
 }
 
-.livro-info .titulo {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+.capa-titulo {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
-.info-line {
+.capa-autor {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+}
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 32px 32px 28px;
+}
+
+.conteudo h2 {
+  padding-right: 32px;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.autor {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.preco {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #fff;
-  margin-top: 1rem;
-}
-
-.modal-body {
-  padding: 2rem;
-  justify-content: center;
-  align-items: center;
-  display: center;
-  grid-template-columns: 2fr 1fr;
-  gap: 1rem;
-}
-
-.descricao h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #c2410c;
-}
-
-.descricao p {
-  background: linear-gradient(to right, #fff7ed, #fffbeb);
-  padding: 1rem;
-  border-radius: 1rem;
-  border: 1px solid #fed7aa;
-  color: #78350f;
-  line-height: 1.6;
-}
-
-.detalhes h4 {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  color: #c2410c;
-}
-
-.detalhe-item {
-  display: flex;
-  justify-content: space-between;
-  background: rgba(255, 255, 255, 0.5);
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  margin-bottom: 0.5rem;
-  color: #7c2d12;
+  gap: 8px;
+  color: var(--gray-600);
   font-weight: 500;
 }
 
-.acoes {
-  margin-top: 2rem;
+.ficha {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin: 12px 0 8px;
+}
+
+.ficha div {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--gray-50);
+}
+
+.ficha dt {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.btn-comprar {
-  background: linear-gradient(to right, #f97316, #fbbf24);
-  color: white;
-  font-weight: bold;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  cursor: pointer;
-  transition: transform 0.3s;
+.ficha dd {
+  margin: 4px 0 0;
+  color: var(--gray-950);
+  font-weight: 600;
 }
 
-.btn-comprar:hover {
-  transform: scale(1.05);
-}
+@media (max-width: 680px) {
+  .detalhes-grid {
+    grid-template-columns: 1fr;
+  }
 
-.btn-favorito {
-  background: white;
-  color: #c2410c;
-  font-weight: bold;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  border: 2px solid #fdba74;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-favorito:hover {
-  background: #fff7ed;
+  .capa {
+    min-height: 200px;
+  }
 }
