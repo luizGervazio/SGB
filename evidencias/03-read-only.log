@@ -1,0 +1,6 @@
+﻿# docker exec backend_api touch /teste.txt
+# 2026-11-22 14:05:35
+
+touch: /teste.txt: Read-only file system
+exit code: 1
+

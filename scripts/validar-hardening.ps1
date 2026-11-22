@@ -34,7 +34,8 @@ Run-Step 'docker exec backend_api whoami' '02-whoami.log' {
 }
 
 Run-Step 'docker exec backend_api touch /teste.txt' '03-read-only.log' {
-    docker exec backend_api touch /teste.txt
+    # via cmd para o PowerShell 5.1 não embrulhar o stderr em NativeCommandError
+    cmd /c "docker exec backend_api touch /teste.txt 2>&1"
     "exit code: $LASTEXITCODE"
 }
 
@@ -61,6 +62,12 @@ Run-Step 'Gravação no volume do SQLite (/app/data/app.db)' '05-sqlite.log' {
     ''
     'Depois:'
     docker exec backend_api ls -la /app/data
+    docker exec backend_api node -e $contar
+}
+
+Run-Step 'Persistência: dados sobrevivem à recriação do contêiner' '06-persistencia.log' {
+    'Recriando o contêiner backend_api (o volume nomeado é mantido)...'
+    cmd /c "docker compose up -d --force-recreate --wait api 2>&1"
     docker exec backend_api node -e $contar
 }
 
