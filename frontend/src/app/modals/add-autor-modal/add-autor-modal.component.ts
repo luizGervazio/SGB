@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { AutorService } from '../../services/autor.service';
 import { MessageModalComponent } from "../../messages/message-modal/message-modal.component";
@@ -7,7 +8,7 @@ import { MessageModalComponent } from "../../messages/message-modal/message-moda
 @Component({
   selector: 'app-add-autor-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, MessageModalComponent],
+  imports: [LucideAngularModule, CommonModule, FormsModule, MessageModalComponent],
   templateUrl: './add-autor-modal.component.html',
   styleUrls: ['./add-autor-modal.component.css']
 })

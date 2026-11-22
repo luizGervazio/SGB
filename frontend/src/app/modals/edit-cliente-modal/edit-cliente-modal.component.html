@@ -1,39 +1,70 @@
 <div class="modal-overlay" *ngIf="isOpen">
-  <div class="modal">
-    <button class="close-button" (click)="cancel()">×</button>
-    <h3>Editar Cliente</h3>
-
-    <form>
-      <label>Nome:</label>
-      <input type="text" [(ngModel)]="editedCliente.nome" name="Nome" />
-
-
-      <label>Email:</label>
-      <input type="text" [(ngModel)]="editedCliente.email" name="Email" />
-
-      <label>Telefone:</label>
-      <input type="text" [(ngModel)]="editedCliente.telefone" name="Telefone" />
-
-      <label>CPF:</label>
-      <input type="text" [(ngModel)]="editedCliente.cpf" name="CPF" />
-
-      <label>Endereço:</label>
-      <input type="text" [(ngModel)]="editedCliente.endereco" name="Endereço" />
-
-      <label>Numero:</label>
-      <input type="text" [(ngModel)]="editedCliente.numero" name="Numero" />
-
-      <label>Cidade:</label>
-      <input type="text" [(ngModel)]="editedCliente.cidade" name="Cidade" />
-
-      <label>Status:</label>
-      <input type="text" [(ngModel)]="editedCliente.status" name="Status" />  
-
-    <div class="buttons">
-      <button class="btn btn-cancel" (click)="cancel()">Cancelar</button>
-      <button class="btn btn-confirm" (click)="saveChanges()">Salvar alterações</button>
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <span class="modal-icon"><lucide-icon name="pencil" [size]="20"></lucide-icon></span>
+      <div>
+        <h3>Editar cliente</h3>
+        <p>Atualize os dados do leitor.</p>
+      </div>
+      <button class="icon-btn" type="button" title="Fechar" (click)="cancel()">
+        <lucide-icon name="x" [size]="20"></lucide-icon>
+      </button>
     </div>
-    </form>
+
+    <div class="modal-body">
+      <form class="form-grid">
+        <div class="field span-2">
+          <label for="Nome">Nome completo</label>
+          <input id="Nome" type="text" [(ngModel)]="editedCliente.nome" name="Nome" placeholder="Ex.: Ana Souza" />
+        </div>
+
+        <div class="field">
+          <label for="Email">E-mail</label>
+          <input id="Email" type="email" [(ngModel)]="editedCliente.email" name="Email" placeholder="ana@exemplo.com" />
+        </div>
+
+        <div class="field">
+          <label for="Telefone">Telefone</label>
+          <input id="Telefone" type="tel" [(ngModel)]="editedCliente.telefone" name="Telefone" placeholder="(41) 99999-0000" />
+        </div>
+
+        <div class="field">
+          <label for="CPF">CPF</label>
+          <input id="CPF" type="text" [(ngModel)]="editedCliente.cpf" name="CPF" placeholder="000.000.000-00" />
+        </div>
+
+        <div class="field">
+          <label for="Status">Status</label>
+          <select id="Status" [(ngModel)]="editedCliente.status" name="Status">
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="Endereco">Endereço</label>
+          <input id="Endereco" type="text" [(ngModel)]="editedCliente.endereco" name="Endereco" placeholder="Rua, avenida..." />
+        </div>
+
+        <div class="field">
+          <label for="Numero">Número</label>
+          <input id="Numero" type="text" [(ngModel)]="editedCliente.numero" name="Numero" placeholder="120" />
+        </div>
+
+        <div class="field span-2">
+          <label for="Cidade">Cidade</label>
+          <input id="Cidade" type="text" [(ngModel)]="editedCliente.cidade" name="Cidade" placeholder="Curitiba" />
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" type="button" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-primary" type="button" (click)="saveChanges()">
+        <lucide-icon name="circle-check" [size]="18"></lucide-icon>
+        Salvar alterações
+      </button>
+    </div>
   </div>
 </div>
 

@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { ClienteService } from '../../services/cliente.service';
 import { MessageModalComponent } from "../../messages/message-modal/message-modal.component"; // importa o service
 
 @Component({
   selector: 'app-remove-cliente-modal',
   standalone: true,
-  imports: [CommonModule, MessageModalComponent],
+  imports: [LucideAngularModule, CommonModule, MessageModalComponent],
   templateUrl: './remove-cliente-modal.component.html',
   styleUrls: ['./remove-cliente-modal.component.css']
 })
