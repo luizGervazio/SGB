@@ -1,0 +1,16 @@
+node_modules
+dist
+generated
+coverage
+test
+*.db
+*.db-journal
+.env
+.env.*
+!.env.example
+npm-debug.log*
+Dockerfile
+.dockerignore
+.git
+.vscode
+.idea
