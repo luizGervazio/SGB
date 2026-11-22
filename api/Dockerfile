@@ -47,12 +47,18 @@ COPY --from=build /build/node_modules ./node_modules
 COPY --from=build /build/prisma ./prisma
 COPY --from=build /build/dist ./dist
 
-USER appuser
+# UID:GID numéricos de appuser:appgroup. O número permite que o host
+# e orquestradores (ex.: runAsNonRoot no Kubernetes) confirmem que não
+# é root sem depender do /etc/passwd da imagem; whoami continua
+# retornando "appuser".
+USER 10001:10001
 
 EXPOSE 3000
 
+# Healthcheck em forma JSON usando o próprio Node (fetch nativo),
+# sem depender de shell nem de ferramentas extras na imagem.
 HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=3 \
-    CMD wget -q -O /dev/null http://127.0.0.1:3000/ || exit 1
+    CMD ["node", "-e", "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
 
 # Aplica as migrations no SQLite do volume e sobe a API.
 # "exec" faz o Node virar o PID 1 e receber os sinais de parada.
