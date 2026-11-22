@@ -10,7 +10,7 @@ import { EmailModule } from '../email/email.module';
   imports: [
     UsuarioModule,
     JwtModule.register({
-      secret: 'JWT_SECRET_KEY_TROQUE_ISSO',
+      secret: process.env.JWT_SECRET ?? 'dev-only-troque-em-producao',
       signOptions: { expiresIn: '1h' },
     }),
     EmailModule,
