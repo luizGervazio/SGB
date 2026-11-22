@@ -1,23 +1,39 @@
-<div class="sidebar" [class.closed]="isClosed">
-    <div class="logo-container">
-        <img [src]="isClosed ? 'app/assets/icone.png' : 'app/assets/logo.png'" alt="Logo"
-            class="{{ isClosed ? 'icon' : 'logo' }}">
-    </div>
+<aside class="sidebar" [class.closed]="isClosed">
+  <div class="sidebar-top">
+    <a routerLink="/livros" class="brand" title="SGB">
+      <img *ngIf="!isClosed" src="app/assets/logo.png" alt="Library Manager" class="brand-logo" />
+      <img *ngIf="isClosed" src="app/assets/icone.png" alt="SGB" class="brand-icon" />
+    </a>
+  </div>
 
+  <nav class="sidebar-nav">
+    <span class="nav-section" *ngIf="!isClosed">Gestão</span>
+    <a
+      *ngFor="let item of menuItems"
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      class="nav-item"
+      [title]="isClosed ? item.label : ''"
+    >
+      <lucide-icon [name]="item.icon" [size]="20" [strokeWidth]="1.9"></lucide-icon>
+      <span class="nav-label" *ngIf="!isClosed">{{ item.label }}</span>
+    </a>
 
-    <button class="toggle-btn" (click)="toggleSidebar()">
-        {{ isClosed ? '☰' : '✖' }}
+    <span class="nav-section" *ngIf="!isClosed">Público</span>
+    <a routerLink="/catalogo" routerLinkActive="active" class="nav-item" [title]="isClosed ? 'Catálogo' : ''">
+      <lucide-icon name="layout-grid" [size]="20" [strokeWidth]="1.9"></lucide-icon>
+      <span class="nav-label" *ngIf="!isClosed">Catálogo</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <button class="nav-item" (click)="toggleSidebar()" [title]="isClosed ? 'Expandir menu' : 'Recolher menu'">
+      <lucide-icon [name]="isClosed ? 'panel-left-open' : 'panel-left-close'" [size]="20" [strokeWidth]="1.9"></lucide-icon>
+      <span class="nav-label" *ngIf="!isClosed">Recolher menu</span>
     </button>
-
-
-    <ul>
-        <li *ngFor="let item of menuItems">
-          <a [routerLink]="item.route">
-            {{ item.icon }} 
-            <span class="link-text" [class.hidden]="isClosed">{{ item.label }}</span>
-          </a>
-        </li>
-    </ul>
-      
-</div>
-
+    <button class="nav-item logout" (click)="sair()" [title]="isClosed ? 'Sair' : ''">
+      <lucide-icon name="log-out" [size]="20" [strokeWidth]="1.9"></lucide-icon>
+      <span class="nav-label" *ngIf="!isClosed">Sair</span>
+    </button>
+  </div>
+</aside>

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { SidebarService } from '../../services/sidebar.service';
 import { AddAutorModalComponent } from '../../modals/add-autor-modal/add-autor-modal.component';
@@ -7,12 +8,14 @@ import { AddAutorModalComponent } from '../../modals/add-autor-modal/add-autor-m
 @Component({
   selector: 'app-fixed-header-autores',
   standalone: true,
-  imports: [CommonModule, FormsModule, AddAutorModalComponent], 
+  imports: [CommonModule, LucideAngularModule, FormsModule, AddAutorModalComponent], 
   templateUrl: './fixed-header-autores.component.html',
   styleUrls: ['./fixed-header-autores.component.css']
 })
 export class FixedHeaderAutorComponent implements OnInit {
   @Input() title: string = 'Título';
+  @Input() subtitle: string = '';
+  @Input() icon: string = 'book-open';
   @Input() placeholder: string = 'Buscar...';
   @Input() addButtonLabel: string = 'Adicionar';
 

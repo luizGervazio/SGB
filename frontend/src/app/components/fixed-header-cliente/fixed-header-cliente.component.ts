@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { SidebarService } from '../../services/sidebar.service';
 import { AddClientModalComponent } from '../../modals/add-client-modal/add-client-modal.component';
@@ -7,12 +8,14 @@ import { AddClientModalComponent } from '../../modals/add-client-modal/add-clien
 @Component({
   selector: 'app-fixed-header-cliente',
   standalone: true,
-  imports: [CommonModule, FormsModule,AddClientModalComponent],
+  imports: [CommonModule, LucideAngularModule, FormsModule,AddClientModalComponent],
   templateUrl: './fixed-header-cliente.component.html',
   styleUrls: ['./fixed-header-cliente.component.css']
 })
 export class FixedHeaderComponentCliente implements OnInit {
   @Input() title: string = 'Título';
+  @Input() subtitle: string = '';
+  @Input() icon: string = 'book-open';
   @Input() placeholder: string = 'Buscar...';
   @Input() addButtonLabel: string = 'Adicionar';
 

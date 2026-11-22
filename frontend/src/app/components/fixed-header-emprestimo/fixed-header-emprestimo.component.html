@@ -1,20 +1,30 @@
-<div class="fixed-header" [class.closed]="isSidebarClosed">
+<header class="fixed-header" [class.closed]="isSidebarClosed">
   <div class="header-content">
-    <h2>{{ title }}</h2>
+    <div class="header-title">
+      <span class="title-icon"><lucide-icon [name]="icon" [size]="20"></lucide-icon></span>
+      <div>
+        <h2>{{ title }}</h2>
+        <p *ngIf="subtitle">{{ subtitle }}</p>
+      </div>
+    </div>
 
-    <input
-      type="text"
-      class="search-input"
-      [placeholder]="placeholder || 'Buscar...'"
-      [(ngModel)]="searchTerm"
-      (input)="onSearch.emit(searchTerm)"
-    />
+    <div class="header-search input-icon">
+      <lucide-icon name="search" [size]="18"></lucide-icon>
+      <input
+        type="search"
+        class="input"
+        [placeholder]="placeholder || 'Buscar...'"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch.emit(searchTerm)"
+      />
+    </div>
 
-    <button (click)="openModal()" class="btn btn-success" style="margin-left: auto;">
-      <i class="fas fa-plus"></i> {{ addButtonLabel || 'Adicionar' }}
+    <button (click)="openModal()" class="btn btn-primary">
+      <lucide-icon name="plus" [size]="18"></lucide-icon>
+      <span class="header-add-label">{{ addButtonLabel || 'Adicionar' }}</span>
     </button>
   </div>
-</div>
+</header>
 
 <app-add-emprestimo-modal
   [isOpen]="showAddBookModal"

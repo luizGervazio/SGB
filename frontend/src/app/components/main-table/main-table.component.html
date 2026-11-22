@@ -1,54 +1,61 @@
-<div class="main-content" [class.closed]="isSidebarClosed">
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>ID Autor</th>
-          <th>Título</th>
-          <th>Disponível</th>
-          <th>Páginas</th>
-          <th>Ano</th>
-          <th>Gênero</th>
-          <th>Editora</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let livro of livrosFiltrados()">
-          <td>{{ livro.id }}</td>
-          <td>
-            <span *ngFor="let autor of livro.autores; let last = last">
-              {{ autor.id }} - {{ autor.nome }}<span *ngIf="!last">, </span>
-            </span>
-          </td>
-          <td>{{ livro.titulo }}</td>
-          <td>
-            <span [ngClass]="livro.disponivel ? 'disponivel' : 'emprestado'">
-              {{ livro.disponivel ? 'Disponível' : 'Emprestado' }}
-            </span>
-          </td>
-          <td>{{ livro.paginas }}</td>
-          <td>{{ livro.ano }}</td>
-          <td>{{ livro.genero }}</td>
-          <td>{{ livro.editora }}</td>
-          <td>
-            <div class="action-buttons">
-              <button (click)="openEditBookModal(livro)" class="btn btn-warning">
-                <i class="fas fa-edit"></i> Editar
-              </button>
-              <button (click)="openRemoveBookModal(livro)" class="btn btn-danger">
-                <i class="fas fa-trash"></i> Remover
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<section class="page-body" [class.closed]="isSidebarClosed">
+  <div class="card table-card">
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="col-id">ID</th>
+            <th>Livro</th>
+            <th>Gênero</th>
+            <th>Editora</th>
+            <th>Ano</th>
+            <th>Páginas</th>
+            <th>Status</th>
+            <th class="col-actions">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let livro of livrosFiltrados()">
+            <td class="col-id">#{{ livro.id }}</td>
+            <td>
+              <span class="cell-strong">{{ livro.titulo }}</span>
+              <span class="cell-sub">{{ nomesAutores(livro) }}</span>
+            </td>
+            <td><span class="chip">{{ livro.genero }}</span></td>
+            <td>{{ livro.editora }}</td>
+            <td class="num">{{ livro.ano }}</td>
+            <td class="num">{{ livro.paginas }}</td>
+            <td>
+              <span class="badge" [ngClass]="livro.disponivel ? 'badge-success' : 'badge-warning'">
+                {{ livro.disponivel ? 'Disponível' : 'Emprestado' }}
+              </span>
+            </td>
+            <td class="col-actions">
+              <div class="row-actions">
+                <button class="icon-btn edit" title="Editar livro" (click)="openEditBookModal(livro)">
+                  <lucide-icon name="pencil" [size]="17"></lucide-icon>
+                </button>
+                <button class="icon-btn delete" title="Remover livro" (click)="openRemoveBookModal(livro)">
+                  <lucide-icon name="trash-2" [size]="17"></lucide-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="livrosFiltrados().length === 0">
+            <td colspan="8">
+              <div class="empty-state">
+                <lucide-icon name="inbox" [size]="40" [strokeWidth]="1.5"></lucide-icon>
+                <strong>Nenhum livro encontrado</strong>
+                {{ filtro ? 'Tente buscar por outro termo.' : 'Cadastre o primeiro livro em Novo livro.' }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- Modal de Remoção -->
 <app-remove-book-modal
   [isOpen]="showRemoveBookModal"
   [book]="bookToRemove"
@@ -56,7 +63,6 @@
   (remove)="removeBook($event)"
 ></app-remove-book-modal>
 
-<!-- Modal de Edição -->
 <app-edit-book-modal
   [isOpen]="showEditBookModal"
   [book]="selectedBook"

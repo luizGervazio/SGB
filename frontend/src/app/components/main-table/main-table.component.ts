@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { SidebarService } from '../../services/sidebar.service';
 import { RemoveBookModalComponent } from '../../modals/remove-book-modal/remove-book-modal.component';
@@ -10,6 +11,7 @@ import { LivroService } from '../../services/livro.service';
   selector: 'app-main-table',
   standalone: true,
   imports: [
+    LucideAngularModule,
     CommonModule,
     FormsModule,
     RemoveBookModalComponent,
@@ -19,7 +21,7 @@ import { LivroService } from '../../services/livro.service';
   styleUrls: ['./main-table.component.css']
 })
 export class MainTableComponent implements OnInit {
-  filtro: string = '';
+  @Input() filtro: string = '';
   isSidebarClosed: boolean = false;
 
   livros: any[] = [];
@@ -55,14 +57,16 @@ export class MainTableComponent implements OnInit {
   }
 
   livrosFiltrados() {
-    const texto = this.filtro.toLowerCase();
-    return this.livros.filter(l =>
-      l.titulo.toLowerCase().includes(texto) ||
-      l.autores.toLowerCase().includes(texto) ||
-      l.genero.toLowerCase().includes(texto) ||
-      l.editora.toLowerCase().includes(texto) ||
-      (l.autores?.map((a: any) => a.nome || a).join(', ') || '').toLowerCase().includes(texto)
+    const texto = (this.filtro || '').toLowerCase().trim();
+    if (!texto) return this.livros;
+    return this.livros.filter((l) =>
+      [l.id?.toString(), l.titulo, l.genero, l.editora, this.nomesAutores(l)]
+        .some((campo) => campo?.toLowerCase().includes(texto)),
     );
+  }
+
+  nomesAutores(livro: any): string {
+    return livro?.autores?.map((a: any) => a.nome || a).join(', ') || 'Sem autor';
   }
 
   // Edição

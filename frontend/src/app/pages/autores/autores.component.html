@@ -1,14 +1,12 @@
 <app-sidebar></app-sidebar>
-<router-outlet></router-outlet>
 
 <app-fixed-header-autores
-  [title]="'Lista de Autores'"
-  [placeholder]="'buscar Autor por ID ou Nome do Autor...'"
-  [addButtonLabel]="'Criar Autor'"
-  (onSearch)="buscarAutor($event)"
-  (onAdd)="abrirModalAutor()"
+  title="Autores"
+  subtitle="Autores vinculados ao acervo"
+  icon="feather"
+  placeholder="Buscar por nome ou ID..."
+  addButtonLabel="Novo autor"
+  (onSearch)="termo = $event"
 ></app-fixed-header-autores>
 
-<div class="main-content">
-  <app-main-table-autor></app-main-table-autor>
-</div>
+<app-main-table-autor [filtro]="termo"></app-main-table-autor>

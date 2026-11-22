@@ -1,14 +1,12 @@
 <app-sidebar></app-sidebar>
-<router-outlet></router-outlet>
 
 <app-fixed-header
-  [title]="'📚 Lista de Livros'"
-  [placeholder]="'🔍 Buscar por ID ou Nome do Livro...'"
-  [addButtonLabel]="'Adicionar Livro'"
-  (onSearch)="buscarLivro($event)"
-  (onAdd)="abrirModalLivro()"
+  title="Livros"
+  subtitle="Acervo cadastrado na biblioteca"
+  icon="book-open"
+  placeholder="Buscar por título, autor, gênero ou editora..."
+  addButtonLabel="Novo livro"
+  (onSearch)="termo = $event"
 ></app-fixed-header>
 
-<div class="main-content">
-  <app-main-table></app-main-table>
-</div>
+<app-main-table [filtro]="termo"></app-main-table>
