@@ -1,24 +1,38 @@
-<div class="body">
-  <div class="login-container">
-    <form [formGroup]="recuperarForm" (ngSubmit)="enviarLink()">
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input
-          id="email"
-          type="email"
-          formControlName="email"
-          placeholder="Digite seu e-mail cadastrado"
-        />
+<div class="auth-page">
+  <app-auth-brand></app-auth-brand>
+
+  <main class="auth-panel">
+    <div class="auth-card">
+      <img src="app/assets/logo.png" alt="Library Manager" class="auth-logo" />
+      <h2>Recuperar senha</h2>
+      <p class="subtitle">Informe o e-mail cadastrado e enviaremos um token para redefinir sua senha.</p>
+
+      <form [formGroup]="recuperarForm" (ngSubmit)="enviarLink()">
+        <div class="field">
+          <label for="email">E-mail</label>
+          <div class="input-icon">
+            <lucide-icon name="mail" [size]="18"></lucide-icon>
+            <input id="email" class="input" type="email" formControlName="email" placeholder="voce@exemplo.com" autocomplete="email" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+          <lucide-icon name="mail" [size]="18"></lucide-icon>
+          Enviar token de recuperação
+        </button>
+      </form>
+
+      <div class="notice info" style="margin-top: 20px">
+        <lucide-icon name="circle-alert" [size]="18"></lucide-icon>
+        <span>Já recebeu o token? <a routerLink="/alterar" class="link">Defina a nova senha</a>.</span>
       </div>
 
-      <button type="submit" class="btn-login">Enviar link de recuperação</button>
-    </form>
-
-    <p class="support-text">
-      Caso não consiga recuperar sua senha, entre em contato com o suporte através do e-mail:
-      <strong>suporteexemplo.com</strong>
-    </p>
-  </div>
+      <a routerLink="/login" class="back-link">
+        <lucide-icon name="arrow-left" [size]="16"></lucide-icon>
+        Voltar para o login
+      </a>
+    </div>
+  </main>
 </div>
 
 <app-message-modal

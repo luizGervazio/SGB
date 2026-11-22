@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { LucideAngularModule } from 'lucide-angular';
+import { AuthBrandComponent } from '../../components/auth-brand/auth-brand.component';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageModalComponent } from "../../messages/message-modal/message-modal.component";
 
 @Component({
   selector: 'app-alterar',
-  imports: [CommonModule, ReactiveFormsModule, MessageModalComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, LucideAngularModule, AuthBrandComponent, MessageModalComponent],
   templateUrl: './alterar.component.html',
   styleUrls: ['./alterar.component.css']
 })
