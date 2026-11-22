@@ -51,15 +51,14 @@ export class LivroService {
   async findAll(titulo: string, autor: string) {
     const getLivros = await this.prisma.livro.findMany({
       where: {
+        // SQLite: contains (LIKE) já é case-insensitive para ASCII
         titulo: {
           contains: titulo,
-          mode: 'insensitive',
         },
         autores: {
           some: {
             nome: {
               contains: autor,
-              mode: 'insensitive',
             },
           },
         },
