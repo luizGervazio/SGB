@@ -1,0 +1,66 @@
+name: sgb
+
+services:
+  # ------------------------------------------------------------------
+  # API NestJS + Prisma + SQLite
+  # ------------------------------------------------------------------
+  api:
+    build:
+      context: ./api
+    image: sgb-api:latest
+    container_name: backend_api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: file:/app/data/app.db
+      JWT_SECRET: ${JWT_SECRET:-troque-este-segredo-em-producao}
+      CORS_ORIGIN: http://localhost:8080
+      FRONTEND_URL: http://localhost:8080
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+    volumes:
+      # Único ponto gravável do contêiner: onde o SQLite salva app.db
+      - sqlite_data:/app/data
+    # A API não publica porta no host: só o Nginx a acessa, pela rede interna
+    expose:
+      - "3000"
+    networks:
+      - backend
+
+    # ---------------- Hardening ----------------
+    # Sistema de arquivos raiz somente-leitura
+    read_only: true
+    # Remove todas as capabilities do kernel Linux
+    cap_drop: [ALL]
+    # Impede elevação de privilégio via binários SUID/SGID
+    security_opt: [no-new-privileges:true]
+    # Área temporária efêmera em RAM
+    tmpfs: [/tmp]
+
+  # ------------------------------------------------------------------
+  # Frontend Angular servido pelo Nginx (proxy de /api para a API)
+  # ------------------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+    image: sgb-frontend:latest
+    container_name: frontend_web
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - backend
+
+    # Mesmo hardening aplicado ao Nginx (extra)
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: [/tmp]
+
+volumes:
+  sqlite_data:
+
+networks:
+  backend:
